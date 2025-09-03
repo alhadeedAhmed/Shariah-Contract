@@ -8,26 +8,43 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 45 25% 97%;
+    --foreground: 0 50% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 50% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 50% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 60% 35%;
+    --primary-foreground: 45 100% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 45 85% 65%;
+    --secondary-foreground: 0 50% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 45 15% 92%;
+    --muted-foreground: 0 20% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 75% 55%;
+    --accent-foreground: 0 50% 15%;
+
+    /* Custom golden and maroon palette */
+    --maroon: 0 60% 35%;
+    --maroon-light: 0 50% 45%;
+    --maroon-dark: 0 70% 25%;
+    --golden: 45 85% 65%;
+    --golden-light: 45 90% 75%;
+    --golden-dark: 45 75% 55%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--maroon)), hsl(var(--maroon-light)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--golden-light)), hsl(var(--golden)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--maroon)) 0%, hsl(var(--maroon-light)) 50%, hsl(var(--golden-dark)) 100%);
+    
+    /* Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--maroon) / 0.2);
+    --shadow-golden: 0 5px 20px -5px hsl(var(--golden) / 0.3);
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
