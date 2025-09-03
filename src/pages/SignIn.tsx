@@ -21,7 +21,7 @@ const SignIn = () => {
         description: "Signed in with demo account",
       });
       setIsLoading(false);
-      navigate("/");
+      navigate("/dashboard");
     }, 1500);
   };
 
