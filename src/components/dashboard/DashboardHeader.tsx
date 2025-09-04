@@ -83,10 +83,14 @@ const DashboardHeader = () => {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <Avatar className="h-8 w-8 border-2 border-maroon/20">
-                    <AvatarImage src="/placeholder.svg" alt="David Cooper" />
-                    <AvatarFallback className="bg-maroon/10 text-maroon font-semibold">
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage 
+                      src="/placeholder.svg" 
+                      alt="David Cooper"
+                      className="object-cover"
+                    />
+                    <AvatarFallback className="bg-gray-100 text-gray-600">
                       DC
                     </AvatarFallback>
                   </Avatar>

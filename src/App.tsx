@@ -8,6 +8,7 @@ import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
 import AIContracts from './pages/AIContracts';
 import EnhancedWorkflow from './pages/EnhancedWorkflow';
+import CreateContract from './pages/CreateContract';
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/ai-contracts" element={<AIContracts />} />
           <Route path="/enhanced-workflow" element={<EnhancedWorkflow />} />
+          <Route path="/create-contract" element={<CreateContract />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
