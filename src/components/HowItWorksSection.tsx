@@ -1,70 +1,172 @@
-import { CheckCircle, FileText, Shield, Banknote } from "lucide-react";
+import { motion } from "framer-motion";
+import { FileText, Shield, CheckCircle, Zap, Users, Brain } from "lucide-react";
 
 const steps = [
   {
     number: "1",
     icon: FileText,
-    title: "Create",
-    description: "Create smart contracts and choose between numerous financial instrument frameworks."
+    title: "Onboard & Create",
+    description:
+      "Register with digital identity verification, get your Shariah Digital Passport, and choose from Murabahah, Musharakah, or custom contract templates.",
+    details: [
+      "KYC Verification",
+      "Biometric Authentication",
+      "Digital Passport Generation",
+    ],
   },
   {
-    number: "2", 
-    icon: Shield,
-    title: "Validate",
-    description: "Get independent and collective Islamic Shariah Compliance validations."
+    number: "2",
+    icon: Brain,
+    title: "AI Analysis",
+    description:
+      "Our advanced AI engine analyzes your contract for Shariah compliance, performs risk assessment, and generates personalized terms.",
+    details: ["Riba Detection", "Gharar Analysis", "Risk Profiling"],
   },
   {
     number: "3",
-    icon: CheckCircle, 
-    title: "Verify",
-    description: "Publish Islamic scholars validation along with Shariah compliance proofs."
+    icon: Shield,
+    title: "Scholar Validation",
+    description:
+      "Certified Islamic scholars review complex contracts through our secure platform, providing Proof of Faith (POF) certificates.",
+    details: ["Expert Review", "Peer Consultation", "Compliance Certification"],
   },
   {
     number: "4",
-    icon: Banknote,
-    title: "Execute",
-    description: "Automate contracts and governed smart financial transactions for maximum."
-  }
+    icon: Zap,
+    title: "Execute & Monitor",
+    description:
+      "Smart contracts execute automatically with blockchain security, real-time monitoring, and integrated payment processing through SATpay.",
+    details: [
+      "Automated Execution",
+      "Payment Integration",
+      "Performance Tracking",
+    ],
+  },
+];
+
+const userTypes = [
+  {
+    icon: Users,
+    title: "Individual Users",
+    description: "Personal financing for vehicles, homes, and consumer goods",
+    flow: "Vehicle Murabahah Example",
+  },
+  {
+    icon: FileText,
+    title: "Business Entities",
+    description: "Partnership agreements and investment contracts",
+    flow: "Musharakah Partnership",
+  },
+  {
+    icon: Shield,
+    title: "Service Providers",
+    description: "Dealers, suppliers, and financial institutions",
+    flow: "Integrated Marketplace",
+  },
 ];
 
 const HowItWorksSection = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-golden/5 to-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-maroon mb-4">
-            How It Works
+    <section
+      id="how-it-works"
+      className="py-24 bg-gradient-to-b from-background via-golden/5 to-background relative overflow-hidden"
+    >
+      {/* Glow Background */}
+      <motion.div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-maroon/10 blur-3xl rounded-full"
+        animate={{ opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Section Title */}
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold text-maroon mb-6">
+            How Our Platform Works
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Our revolutionary 200-year-roadmap approach complete Shariah compliance.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A comprehensive 4-step process ensuring complete Shariah compliance
+            from contract creation to execution
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {steps.map((step, index) => (
-            <div key={index} className="text-center group">
-              {/* Step Number */}
-              <div className="relative mb-6">
-                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-maroon to-maroon-light rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform duration-300">
-                  {step.number}
-                </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-golden/50 to-transparent -translate-x-8"></div>
-                )}
-              </div>
-
-              {/* Icon */}
-              <div className="mb-4">
-                <div className="w-12 h-12 mx-auto bg-golden/10 rounded-lg flex items-center justify-center">
-                  <step.icon className="h-6 w-6 text-golden-dark" />
-                </div>
-              </div>
-
-              {/* Content */}
-              <h3 className="font-semibold text-xl mb-3 text-maroon">{step.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+        {/* User Types - horizontal scroll */}
+        <motion.div
+          className="flex gap-6 overflow-x-auto pb-6 mb-16 scrollbar-hide"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          {userTypes.map((type, index) => (
+            <div
+              key={index}
+              className="min-w-[280px] bg-white/60 backdrop-blur-md border border-golden/20 p-6 rounded-2xl shadow-md flex-shrink-0 hover:shadow-lg hover:border-golden/40 transition"
+            >
+              <type.icon className="h-8 w-8 text-maroon mb-4" />
+              <h3 className="font-semibold text-maroon mb-2">{type.title}</h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                {type.description}
+              </p>
+              <div className="text-xs text-golden font-medium">{type.flow}</div>
             </div>
           ))}
+        </motion.div>
+
+        {/* Steps Timeline */}
+        <div className="relative">
+          {/* Golden vertical line */}
+          <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-golden/50 to-maroon/50 rounded-full"></div>
+
+          <div className="space-y-12">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                className="relative pl-20"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                {/* Step circle */}
+                <div className="absolute left-2 top-2 w-12 h-12 rounded-full bg-gradient-to-br from-maroon to-golden flex items-center justify-center text-white font-bold shadow-md">
+                  {step.number}
+                </div>
+
+                {/* Content box */}
+                <div className="bg-white/80 backdrop-blur-md rounded-xl border border-golden/20 p-6 shadow-md hover:shadow-lg transition">
+                  <div className="flex items-center mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-golden/10 flex items-center justify-center mr-3">
+                      <step.icon className="h-6 w-6 text-golden-dark" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-maroon">
+                      {step.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {step.description}
+                  </p>
+                  <ul className="text-xs text-muted-foreground space-y-1">
+                    {step.details.map((detail, i) => (
+                      <li
+                        key={i}
+                        className="flex items-center space-x-2 hover:text-maroon-light transition"
+                      >
+                        <CheckCircle className="h-3 w-3 text-golden" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

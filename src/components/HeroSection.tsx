@@ -1,47 +1,133 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Shield, BookOpen, Zap } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-background via-background to-golden-light/10">
-      <div className="container mx-auto px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center space-x-2 bg-golden/10 text-maroon px-4 py-2 rounded-full mb-6">
-            <Shield className="h-4 w-4" />
-            <span className="text-sm font-medium">Shariah Compliant Intelligence</span>
-          </div>
-          
-          {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-maroon mb-6 leading-tight">
-            Revolutionary Shariah Programmable 
-            <span className="bg-gradient-to-r from-golden to-golden-dark bg-clip-text text-transparent"> Economy</span>
-          </h1>
-          
-          {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-            Use Dynamic Smart Contracts, Decentralized Autonomous Organizations, Shariah 
-            validators and DeFi using economic mechanisms for transparent and trusted Shariah 
-            finance ecosystem.
-          </p>
-          
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-maroon to-maroon-light hover:from-maroon-dark hover:to-maroon text-white shadow-lg hover:shadow-xl transition-all duration-300"
+    <section className="relative bg-gradient-to-br from-background via-background to-golden/10 overflow-hidden">
+      {/* Background Orbs */}
+      <motion.div
+        className="absolute top-[-5rem] right-[-5rem] w-96 h-96 bg-golden/20 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.35, 0.2] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-[-6rem] left-[-6rem] w-96 h-96 bg-maroon/20 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.3, 0.15] }}
+        transition={{ duration: 12, repeat: Infinity, delay: 2 }}
+      />
+
+      <div className="container mx-auto px-12 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center py-20 lg:py-32">
+          {/* LEFT CONTENT */}
+          <div className="text-left space-y-8">
+            {/* Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-maroon px-4 py-2 rounded-full shadow-md"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
             >
-              Get Started
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-golden text-golden hover:bg-golden hover:text-white transition-all duration-300"
+              <Shield className="h-4 w-4" />
+              <span className="text-sm font-medium">
+                AI-Powered Shariah Compliance Platform
+              </span>
+            </motion.div>
+
+            {/* Heading */}
+            <motion.h1
+              className="text-4xl md:text-6xl font-extrabold text-maroon leading-tight"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Learn More
-            </Button>
+              Transform Islamic Finance with
+              <span className="bg-gradient-to-r from-golden to-golden-dark bg-clip-text text-transparent block mt-2">
+                Smart Contracts
+              </span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              Automate Murabahah, Musharakah, and Islamic contracts with
+              AI-powered Shariah validation, digital passports, and transparent
+              blockchain technology. Join the future of Islamic finance.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Button className="bg-gradient-to-r from-maroon to-maroon-light text-white shadow-lg px-8 py-3 rounded-xl hover:shadow-xl transition-all">
+                Start Creating Contracts
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+
+              <Button
+                variant="outline"
+                className="border-2 border-golden text-golden hover:bg-golden hover:text-white px-8 py-3 rounded-xl shadow-md transition-all"
+              >
+                <BookOpen className="mr-2 h-4 w-4" />
+                View Documentation
+              </Button>
+            </motion.div>
           </div>
+
+          {/* RIGHT CONTENT */}
+          <motion.div
+            className="relative flex justify-center lg:justify-end"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            {/* Glass card */}
+            <div className="relative w-full max-w-md bg-white/10 backdrop-blur-xl border border-golden/30 rounded-2xl shadow-2xl p-8 space-y-6">
+              <h3 className="text-xl font-semibold text-maroon">
+                Platform Highlights
+              </h3>
+              <ul className="space-y-3 text-sm text-maroon/80">
+                {[
+                  "Murabahah Contracts with transparency",
+                  "AI-powered Shariah validation",
+                  "Secure blockchain execution",
+                  "Digital passport identity system",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-2 hover:text-maroon transition-colors"
+                  >
+                    <Zap className="h-4 w-4 text-golden" /> {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="grid grid-cols-3 gap-4 pt-4">
+                {[
+                  { value: "1000+", label: "Contracts" },
+                  { value: "99.9%", label: "Accuracy" },
+                  { value: "24/7", label: "AI Validation" },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="bg-white/20 backdrop-blur-sm rounded-lg py-4 text-center hover:scale-105 transition-transform"
+                  >
+                    <div className="text-lg font-bold text-maroon">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-maroon/70">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

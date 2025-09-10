@@ -17,7 +17,7 @@ import MurabahahWizard from "./pages/MurabahahWizard";
 import ApplicationStatus from "./pages/ApplicationStatus";
 import DeliveryTimeline from "./pages/DeliveryTimeline";
 import Payments from "./pages/Payments";
-import Signup from "./pages/Signup";
+import Signup from "./pages/IndividualSignup";
 import SignupIndex from "./pages/SignupIndex";
 import Notifications from "./pages/Notifications";
 import VehicleServices from "./pages/VehicleServices";
@@ -43,6 +43,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminSystemOversight from "./pages/AdminSystemOversight";
 import AdminUserManagement from "./pages/AdminUserManagement";
 import AdminAnalytics from "./pages/AdminAnalytics";
+import IndividualSignup from "./pages/IndividualSignup";
 
 const queryClient = new QueryClient();
 
@@ -98,7 +99,7 @@ const App = () => (
                 }
               />
               <Route path="/signup" element={<SignupIndex />} />
-              <Route path="/signup/individual" element={<Signup />} />
+              <Route path="/signup/individual" element={<IndividualSignup />} />
               <Route path="/signup/business" element={<BusinessSignup />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/business/signup" element={<BusinessSignup />} />

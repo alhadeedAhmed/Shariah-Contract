@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Link, useNavigate } from "react-router-dom";
+import { Shield, Store, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
 const steps = [
   "Business Registration",
@@ -31,192 +33,288 @@ const ServiceProviderSignup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#042A2A]/5 via-background to-[#B4925F]/5 flex items-center justify-center px-4 py-10">
-      <Card className="w-full max-w-3xl p-8 bg-white/80 backdrop-blur-sm border-[#042A2A]/10">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-semibold text-[#042A2A] tracking-tight">
-            Service Provider Onboarding
-          </h1>
-          <Link
-            to="/signin"
-            className="text-sm text-[#B4925F] hover:text-[#042A2A]"
+    <div className="min-h-screen flex">
+      {/* Left Hero Section */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-maroon-dark via-maroon to-maroon relative overflow-hidden text-white">
+        {/* Background Glow */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-golden rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-maroon-light rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10 flex flex-col justify-center px-12 py-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            Have an account? Sign in
-          </Link>
-        </div>
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-golden to-golden-light rounded-2xl flex items-center justify-center shadow-2xl">
+                <Store className="text-maroon h-8 w-8" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold">
+                  Service Provider Onboarding
+                </h1>
+                <p className="text-golden text-lg">
+                  Upload catalogs, respond to inquiries, and connect with banks.
+                </p>
+              </div>
+            </div>
 
-        {/* Progress Bar */}
-        <Progress value={((step + 1) / steps.length) * 100} className="mb-6" />
-        <div className="text-sm text-[#B4925F] mb-6">
-          Step {step + 1} of {steps.length}: {steps[step]}
-        </div>
-
-        {/* Step 1 - Business Registration */}
-        {step === 0 && (
-          <div className="space-y-4">
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">Business Name</Label>
-              <Input
-                placeholder="Dealer Motors Ltd"
-                className="border-[#042A2A]/20"
-              />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Registration Number
-              </Label>
-              <Input placeholder="REG-123456" className="border-[#042A2A]/20" />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">Industry</Label>
-              <Input
-                placeholder="Car Dealership"
-                className="border-[#042A2A]/20"
-              />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Business License
-              </Label>
-              <Input type="file" className="border-[#042A2A]/20" />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Certifications
-              </Label>
-              <Input type="file" className="border-[#042A2A]/20" />
-            </div>
-          </div>
-        )}
-
-        {/* Step 2 - Compliance Verification */}
-        {step === 1 && (
-          <div className="space-y-4 text-center">
-            <p className="text-[#042A2A] font-semibold text-lg">
-              Compliance Verification
+            <p className="text-lg text-white/90 leading-relaxed mb-6">
+              Become a trusted dealer or supplier in the Islamic finance
+              ecosystem. Get your Shariah-compliant digital passport and
+              integrate seamlessly with SATpay.
             </p>
-            <p className="text-[#B4925F]">
-              Your documents will be reviewed for regulatory and Shariah
-              compliance. This may take up to 48 hours.
-            </p>
-            <div className="flex items-center justify-center gap-2 mt-4">
-              <input type="checkbox" id="compliance" className="h-4 w-4" />
-              <Label htmlFor="compliance" className="text-[#042A2A]">
-                I agree to the platform’s compliance requirements.
-              </Label>
-            </div>
-          </div>
-        )}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-8">
+              <div className="flex flex-col items-center text-center space-y-2">
+                <div className="w-12 h-12 rounded-xl bg-golden/20 flex items-center justify-center">
+                  <Store className="h-6 w-6 text-golden" />
+                </div>
+                <p className="text-sm text-white/90 font-medium">
+                  Marketplace Access
+                </p>
+              </div>
 
-        {/* Step 3 - Provider Profile */}
-        {step === 2 && (
-          <div className="space-y-4">
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Company Description
-              </Label>
-              <Textarea
-                placeholder="We are an authorized Toyota dealer..."
-                className="border-[#042A2A]/20 min-h-[120px]"
-              />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Office Address
-              </Label>
-              <Input
-                placeholder="123 Auto Street, Lahore"
-                className="border-[#042A2A]/20"
-              />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">Contact Email</Label>
-              <Input
-                placeholder="contact@dealermotors.com"
-                className="border-[#042A2A]/20"
-              />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">Upload Logo</Label>
-              <Input type="file" className="border-[#042A2A]/20" />
-            </div>
-          </div>
-        )}
+              <div className="flex flex-col items-center text-center space-y-2">
+                <div className="w-12 h-12 rounded-xl bg-golden/20 flex items-center justify-center">
+                  <Shield className="h-6 w-6 text-golden" />
+                </div>
+                <p className="text-sm text-white/90 font-medium">
+                  Shariah-Compliant Certification
+                </p>
+              </div>
 
-        {/* Step 4 - Platform Integration */}
-        {step === 3 && (
-          <div className="space-y-4">
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Upload Catalog
-              </Label>
-              <Input type="file" className="border-[#042A2A]/20" />
-              <p className="text-xs text-[#B4925F] mt-1">
-                Supported: CSV, Excel, or Images
+              <div className="flex flex-col items-center text-center space-y-2">
+                <div className="w-12 h-12 rounded-xl bg-golden/20 flex items-center justify-center">
+                  <Globe className="h-6 w-6 text-golden" />
+                </div>
+                <p className="text-sm text-white/90 font-medium">
+                  Seamless Platform Integration
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Right Form Section */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-golden/10 p-8 relative overflow-hidden">
+        {/* Background Glow Effects */}
+        <div className="absolute top-20 right-20 w-72 h-72 bg-golden/20 rounded-full blur-3xl animate-pulse"></div>
+        <div
+          className="absolute bottom-20 left-20 w-64 h-64 bg-maroon/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+
+        <div className="w-full max-w-2xl relative z-10">
+          <Card className="bg-white/80 backdrop-blur-xl border-0 shadow-2xl rounded-3xl overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-maroon via-golden to-maroon-light"></div>
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-8 pt-8 pb-4">
+              <h1 className="text-2xl font-bold text-maroon">
+                Service Provider Onboarding
+              </h1>
+              <Link
+                to="/signin"
+                className="text-sm text-golden hover:text-maroon font-medium"
+              >
+                Have an account? Sign in
+              </Link>
+            </div>
+
+            {/* Progress */}
+            <div className="px-8">
+              <Progress
+                value={((step + 1) / steps.length) * 100}
+                className="mb-4"
+              />
+              <p className="text-sm text-golden mb-6">
+                Step {step + 1} of {steps.length}: {steps[step]}
               </p>
             </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Pricing Preferences
-              </Label>
-              <Input
-                placeholder="e.g. Retail price, Dealer price"
-                className="border-[#042A2A]/20"
-              />
-            </div>
-            <div>
-              <Label className="mb-2 block text-[#042A2A]">
-                Payment Preferences
-              </Label>
-              <Input
-                placeholder="Bank account / SATpay ID"
-                className="border-[#042A2A]/20"
-              />
-            </div>
-          </div>
-        )}
 
-        {/* Step 5 - Completion */}
-        {step === 4 && (
-          <div className="space-y-4 text-center">
-            <p className="text-2xl font-semibold text-[#042A2A] tracking-tight">
-              Service Provider Digital Passport Issued
-            </p>
-            <p className="text-[#B4925F]">
-              Your onboarding is complete. You now have access to the provider
-              dashboard to manage inventory, respond to customers, and
-              coordinate with banks.
-            </p>
-          </div>
-        )}
+            {/* Steps */}
+            <div className="px-8 pb-8">
+              {step === 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Business Name
+                    </Label>
+                    <Input
+                      placeholder="Dealer Motors Ltd"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Registration Number
+                    </Label>
+                    <Input
+                      placeholder="REG-123456"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">Industry</Label>
+                    <Input
+                      placeholder="Car Dealership"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Business License
+                    </Label>
+                    <Input type="file" className="border-maroon/20" />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Certifications
+                    </Label>
+                    <Input type="file" className="border-maroon/20" />
+                  </div>
+                </div>
+              )}
 
-        {/* Navigation Buttons */}
-        <div className="mt-8 flex items-center justify-between">
-          <Button
-            variant="outline"
-            onClick={back}
-            disabled={step === 0}
-            className="text-[#042A2A] border-[#042A2A] hover:bg-[#042A2A]/5"
-          >
-            Back
-          </Button>
-          {step < steps.length - 1 ? (
-            <Button
-              onClick={next}
-              className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 text-white"
-            >
-              Next
-            </Button>
-          ) : (
-            <Button
-              onClick={complete}
-              className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 text-white"
-            >
-              Finish
-            </Button>
-          )}
+              {step === 1 && (
+                <div className="space-y-4 text-center">
+                  <p className="text-maroon font-semibold text-lg">
+                    Compliance Verification
+                  </p>
+                  <p className="text-golden">
+                    Your documents will be reviewed for regulatory and Shariah
+                    compliance. This may take up to 48 hours.
+                  </p>
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    <input
+                      type="checkbox"
+                      id="compliance"
+                      className="h-4 w-4"
+                    />
+                    <Label htmlFor="compliance" className="text-maroon">
+                      I agree to the platform’s compliance requirements.
+                    </Label>
+                  </div>
+                </div>
+              )}
+
+              {step === 2 && (
+                <div className="space-y-4">
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Company Description
+                    </Label>
+                    <Textarea
+                      placeholder="We are an authorized Toyota dealer..."
+                      className="border-maroon/20 min-h-[120px]"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Office Address
+                    </Label>
+                    <Input
+                      placeholder="123 Auto Street, Lahore"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Contact Email
+                    </Label>
+                    <Input
+                      placeholder="contact@dealermotors.com"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Upload Logo
+                    </Label>
+                    <Input type="file" className="border-maroon/20" />
+                  </div>
+                </div>
+              )}
+
+              {step === 3 && (
+                <div className="space-y-4">
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Upload Catalog
+                    </Label>
+                    <Input type="file" className="border-maroon/20" />
+                    <p className="text-xs text-golden mt-1">
+                      Supported: CSV, Excel, or Images
+                    </p>
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Pricing Preferences
+                    </Label>
+                    <Input
+                      placeholder="e.g. Retail price, Dealer price"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
+                      Payment Preferences
+                    </Label>
+                    <Input
+                      placeholder="Bank account / SATpay ID"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {step === 4 && (
+                <div className="space-y-4 text-center">
+                  <p className="text-2xl font-semibold text-maroon tracking-tight">
+                    Service Provider Digital Passport Issued
+                  </p>
+                  <p className="text-golden">
+                    Your onboarding is complete. You now have access to the
+                    provider dashboard to manage inventory, respond to
+                    customers, and coordinate with banks.
+                  </p>
+                </div>
+              )}
+
+              {/* Navigation Buttons */}
+              <div className="mt-8 flex items-center justify-between">
+                <Button
+                  variant="outline"
+                  onClick={back}
+                  disabled={step === 0}
+                  className="text-maroon border-maroon hover:bg-maroon/5"
+                >
+                  Back
+                </Button>
+                {step < steps.length - 1 ? (
+                  <Button
+                    onClick={next}
+                    className="bg-gradient-to-r from-maroon to-maroon-dark text-white"
+                  >
+                    Next
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={complete}
+                    className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold"
+                  >
+                    Finish
+                  </Button>
+                )}
+              </div>
+            </div>
+          </Card>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };
