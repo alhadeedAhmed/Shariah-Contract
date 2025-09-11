@@ -117,7 +117,9 @@ const IndividualSignup = () => {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-maroon via-golden to-maroon-dark"></div>
 
             <div className="flex items-center justify-between p-6">
-              <h1 className="text-2xl font-bold text-maroon">Sign up</h1>
+              <h1 className="text-2xl font-bold text-maroon">
+                Individual Signup
+              </h1>
               <Link
                 to="/signin"
                 className="text-sm text-golden hover:text-maroon transition-colors"

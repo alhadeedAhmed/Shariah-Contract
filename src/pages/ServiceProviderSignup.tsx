@@ -115,7 +115,7 @@ const ServiceProviderSignup = () => {
             {/* Header */}
             <div className="flex items-center justify-between px-8 pt-8 pb-4">
               <h1 className="text-2xl font-bold text-maroon">
-                Service Provider Onboarding
+                Service Provider Signup
               </h1>
               <Link
                 to="/signin"
@@ -262,12 +262,27 @@ const ServiceProviderSignup = () => {
                   </div>
                   <div>
                     <Label className="mb-2 block text-maroon">
+                      Inventory Setup
+                    </Label>
+                    <Input
+                      placeholder="e.g. 25 cars in stock"
+                      className="border-maroon/20"
+                    />
+                  </div>
+                  <div>
+                    <Label className="mb-2 block text-maroon">
                       Payment Preferences
                     </Label>
                     <Input
                       placeholder="Bank account / SATpay ID"
                       className="border-maroon/20"
                     />
+                  </div>
+                  <div className="flex items-center gap-2 mt-2">
+                    <input type="checkbox" id="bank" className="h-4 w-4" />
+                    <Label htmlFor="bank" className="text-maroon">
+                      Confirm bank/SATpay account linked
+                    </Label>
                   </div>
                 </div>
               )}

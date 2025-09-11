@@ -126,7 +126,7 @@ const ScholarSignup = () => {
 
             <div className="p-6">
               <h1 className="text-2xl font-bold text-maroon mb-2">
-                Scholar Onboarding
+                Scholar Signup
               </h1>
               <p className="text-sm text-golden mb-6">
                 Step {step + 1} of {steps.length}: {steps[step]}
@@ -152,12 +152,17 @@ const ScholarSignup = () => {
                   />
 
                   <Label className="block text-maroon">
-                    Upload Education Certificates
+                    Upload Credentials
                   </Label>
                   <Input
                     type="file"
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                   />
+
+                  <Label className="block text-maroon">
+                    Upload Education Certificates
+                  </Label>
+                  <Input type="file" />
                 </div>
               )}
 
@@ -186,7 +191,9 @@ const ScholarSignup = () => {
 
               {step === 2 && (
                 <div className="space-y-4">
-                  <p className="text-maroon font-medium">Training Modules</p>
+                  <p className="text-maroon font-medium">
+                    Platform Training Modules
+                  </p>
                   <div className="space-y-2">
                     {[
                       "Review Processes",

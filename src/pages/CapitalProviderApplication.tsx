@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 type Repayment = {
   dueDate: string;
@@ -24,98 +25,136 @@ const CapitalProviderApplication = () => {
   const [offerIssued, setOfferIssued] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#4A0404]/5 via-background to-[#B4925F]/5">
+    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/10">
       <DashboardHeader />
-      <div className="container mx-auto px-8 py-10 space-y-8">
-        <h1 className="text-2xl font-semibold text-[#4A0404]">
+      <div className="container mx-auto px-4 md:px-8 py-10 space-y-10">
+        {/* Page Title */}
+        <motion.h1
+          className="text-2xl md:text-3xl font-bold text-maroon"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           Application Detail – {id}
-        </h1>
+        </motion.h1>
 
         {/* Due diligence */}
-        <Card className="p-6 bg-white/80 border-[#4A0404]/20 space-y-3">
-          <h2 className="text-xl font-semibold text-[#4A0404]">
-            Due Diligence
-          </h2>
-          <ul className="text-sm text-[#B4925F] list-disc pl-6">
-            <li>KYC documents verified</li>
-            <li>Collateral evaluated: Factory Equipment</li>
-            <li>Financial statements reviewed</li>
-          </ul>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-maroon">Due Diligence</h2>
+            <ul className="text-sm text-golden list-disc pl-6 space-y-1">
+              <li>KYC documents verified</li>
+              <li>Collateral evaluated: Factory Equipment</li>
+              <li>Financial statements reviewed</li>
+            </ul>
+          </Card>
+        </motion.div>
 
         {/* Terms & Conditions */}
-        <Card className="p-6 bg-white/80 border-[#4A0404]/20 space-y-3">
-          <h2 className="text-xl font-semibold text-[#4A0404]">
-            Terms & Conditions
-          </h2>
-          <ul className="text-sm text-[#B4925F] list-disc pl-6">
-            <li>Profit Rate: 10% per annum</li>
-            <li>Tenure: 12 months</li>
-            <li>Repayment: Monthly installments</li>
-          </ul>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-maroon">
+              Terms & Conditions
+            </h2>
+            <ul className="text-sm text-golden list-disc pl-6 space-y-1">
+              <li>Profit Rate: 10% per annum</li>
+              <li>Tenure: 12 months</li>
+              <li>Repayment: Monthly installments</li>
+            </ul>
+          </Card>
+        </motion.div>
 
         {/* Offer Letter */}
-        <Card className="p-6 bg-white/80 border-[#4A0404]/20 space-y-3">
-          <h2 className="text-xl font-semibold text-[#4A0404]">Offer Letter</h2>
-          {offerIssued ? (
-            <p className="text-[#B4925F]">
-              Offer Letter issued — Terms confirmed with borrower.
-            </p>
-          ) : (
-            <Button
-              className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 text-white"
-              onClick={() => setOfferIssued(true)}
-            >
-              Issue Offer Letter
-            </Button>
-          )}
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-maroon">Offer Letter</h2>
+            {offerIssued ? (
+              <p className="text-golden">
+                Offer Letter issued — Terms confirmed with borrower.
+              </p>
+            ) : (
+              <Button
+                className="bg-gradient-to-r from-maroon to-maroon-dark text-white hover:opacity-90"
+                onClick={() => setOfferIssued(true)}
+              >
+                Issue Offer Letter
+              </Button>
+            )}
+          </Card>
+        </motion.div>
 
         {/* Repayment Schedule */}
-        <Card className="p-6 bg-white/80 border-[#4A0404]/20 space-y-3">
-          <h2 className="text-xl font-semibold text-[#4A0404]">
-            Repayment Schedule
-          </h2>
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-left text-[#4A0404] border-b border-[#B4925F]">
-                <th className="py-2">Due Date</th>
-                <th className="py-2">Amount</th>
-                <th className="py-2">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {repayments.map((r, i) => (
-                <tr key={i} className="border-b border-[#B4925F]/20">
-                  <td className="py-2">{r.dueDate}</td>
-                  <td className="py-2">${r.amount.toLocaleString()}</td>
-                  <td className="py-2">
-                    <span
-                      className={
-                        r.status === "paid"
-                          ? "text-green-600"
-                          : r.status === "overdue"
-                          ? "text-red-600"
-                          : "text-[#B4925F]"
-                      }
-                    >
-                      {r.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
-
-        <Button
-          variant="outline"
-          className="text-[#4A0404] border-[#4A0404]"
-          onClick={() => navigate("/capital/dashboard")}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
         >
-          Back to Dashboard
-        </Button>
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-4 overflow-x-auto">
+            <h2 className="text-xl font-semibold text-maroon">
+              Repayment Schedule
+            </h2>
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="text-left text-maroon border-b border-golden/40">
+                  <th className="py-2 px-2">Due Date</th>
+                  <th className="py-2 px-2">Amount</th>
+                  <th className="py-2 px-2">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {repayments.map((r, i) => (
+                  <tr
+                    key={i}
+                    className="border-b border-golden/20 hover:bg-golden/5 transition"
+                  >
+                    <td className="py-2 px-2">{r.dueDate}</td>
+                    <td className="py-2 px-2">${r.amount.toLocaleString()}</td>
+                    <td className="py-2 px-2">
+                      <span
+                        className={
+                          r.status === "paid"
+                            ? "text-green-600 font-medium"
+                            : r.status === "overdue"
+                            ? "text-red-600 font-medium"
+                            : "text-golden font-medium"
+                        }
+                      >
+                        {r.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Card>
+        </motion.div>
+
+        {/* Back Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Button
+            variant="outline"
+            className="text-maroon border-maroon hover:bg-maroon/5"
+            onClick={() => navigate("/capital/dashboard")}
+          >
+            ← Back to Dashboard
+          </Button>
+        </motion.div>
       </div>
     </div>
   );

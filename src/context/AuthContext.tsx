@@ -5,7 +5,7 @@ type UserRole =
   | "business"
   | "provider"
   | "scholar"
-  | "capital"
+  | "capitalProvider"
   | "admin"
   | null;
 

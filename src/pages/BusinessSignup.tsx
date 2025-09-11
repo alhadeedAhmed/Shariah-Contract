@@ -8,9 +8,23 @@ import { Progress } from "@/components/ui/progress";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
-import { Shield, Briefcase, FileText, CheckCircle } from "lucide-react";
+import {
+  Shield,
+  Briefcase,
+  FileText,
+  CheckCircle,
+  Fingerprint,
+  UserCheck,
+} from "lucide-react";
 
-const steps = ["KYB Details", "Docs Upload", "MPA", "Passport"] as const;
+const steps = [
+  "KYB Details",
+  "Docs Upload",
+  "Biometric Verification",
+  "Business Verification",
+  "MPA",
+  "Passport",
+] as const;
 
 const BusinessSignup = () => {
   const [step, setStep] = useState<number>(0);
@@ -32,7 +46,6 @@ const BusinessSignup = () => {
     <div className="min-h-screen flex">
       {/* Left Hero Section */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-maroon via-maroon-dark to-maroon relative overflow-hidden text-white">
-        {/* Background Glow */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-96 h-96 bg-golden rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-80 h-80 bg-white rounded-full blur-3xl"></div>
@@ -44,7 +57,6 @@ const BusinessSignup = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Logo & Brand */}
             <div className="flex items-center space-x-4 mb-8">
               <div className="w-16 h-16 bg-gradient-to-br from-golden to-golden-light rounded-2xl flex items-center justify-center shadow-2xl">
                 <Shield className="text-maroon h-8 w-8" />
@@ -58,8 +70,8 @@ const BusinessSignup = () => {
             </div>
 
             <p className="text-lg text-white/80 max-w-lg leading-relaxed mb-12">
-              Seamlessly onboard your business with our KYB verification,
-              digital agreements, and Shariah-compliant passport system.
+              Seamlessly onboard your business with KYB, biometric verification,
+              digital agreements, and Shariah-compliant passports.
             </p>
 
             <div className="grid grid-cols-3 gap-6">
@@ -85,7 +97,6 @@ const BusinessSignup = () => {
 
       {/* Right Form Section */}
       <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-golden/10 p-8 relative overflow-hidden">
-        {/* Background Glow */}
         <div className="absolute top-20 right-20 w-72 h-72 bg-golden/20 rounded-full blur-3xl animate-pulse"></div>
         <div
           className="absolute bottom-20 left-20 w-64 h-64 bg-maroon/10 rounded-full blur-3xl animate-pulse"
@@ -108,7 +119,7 @@ const BusinessSignup = () => {
               </Link>
             </div>
 
-            {/* Progress Bar */}
+            {/* Progress */}
             <div className="px-6">
               <Progress
                 value={((step + 1) / steps.length) * 100}
@@ -121,6 +132,7 @@ const BusinessSignup = () => {
 
             {/* Step Content */}
             <div className="px-6 pb-8 space-y-6">
+              {/* Step 0: KYB */}
               {step === 0 && (
                 <div className="grid grid-cols-2 gap-6">
                   <div>
@@ -160,6 +172,7 @@ const BusinessSignup = () => {
                 </div>
               )}
 
+              {/* Step 1: Docs Upload */}
               {step === 1 && (
                 <div className="space-y-4">
                   <div>
@@ -183,7 +196,50 @@ const BusinessSignup = () => {
                 </div>
               )}
 
+              {/* Step 2: Biometric Verification */}
               {step === 2 && (
+                <div className="flex flex-col items-center justify-center text-center space-y-6 py-10">
+                  <Fingerprint className="h-16 w-16 text-maroon" />
+                  <p className="text-lg text-maroon font-semibold">
+                    Authorized Representative Biometric Verification
+                  </p>
+                  <p className="text-sm text-golden max-w-md">
+                    Please scan your fingerprint or face ID to continue (mock
+                    step).
+                  </p>
+                  <Button className="bg-gradient-to-r from-maroon to-maroon-dark text-white">
+                    Verify Biometric
+                  </Button>
+                </div>
+              )}
+
+              {/* Step 3: Business Verification */}
+              {step === 3 && (
+                <div className="space-y-6">
+                  <p className="text-maroon font-semibold">
+                    Business KYC & Compliance
+                  </p>
+                  <div className="grid grid-cols-3 gap-4">
+                    {[
+                      "KYC Check",
+                      "Compliance Screening",
+                      "Credit Scoring",
+                    ].map((t) => (
+                      <div
+                        key={t}
+                        className="p-4 rounded-xl border border-maroon/10 bg-gradient-to-br from-maroon/5 to-golden/5 text-center"
+                      >
+                        <UserCheck className="h-6 w-6 text-maroon mx-auto mb-2" />
+                        <p className="text-sm font-medium text-maroon">{t}</p>
+                        <p className="text-xs text-golden mt-1">PASS</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 4: MPA */}
+              {step === 4 && (
                 <div className="space-y-4">
                   <p className="text-maroon font-semibold">
                     Master Platform Agreement (MPA)
@@ -202,14 +258,15 @@ const BusinessSignup = () => {
                 </div>
               )}
 
-              {step === 3 && (
+              {/* Step 5: Passport */}
+              {step === 5 && (
                 <div className="space-y-4 text-center">
                   <p className="text-2xl font-semibold text-maroon tracking-tight">
                     Business Shariah Digital Passport Issued
                   </p>
                   <p className="text-golden">
-                    Your KYB and agreement are verified. You can now browse
-                    investments.
+                    Your KYB, biometric, and compliance checks are complete. You
+                    may now browse Musharakah opportunities.
                   </p>
                 </div>
               )}
@@ -233,7 +290,7 @@ const BusinessSignup = () => {
                   </Button>
                 ) : (
                   <Button
-                    className="bg-gradient-to-r from-maroon to-maroon-dark text-white hover:opacity-90"
+                    className="bg-gradient-to-r from-golden to-golden-dark text-maroon hover:opacity-90"
                     onClick={complete}
                   >
                     Finish

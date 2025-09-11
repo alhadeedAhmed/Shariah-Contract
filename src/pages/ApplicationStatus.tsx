@@ -5,9 +5,9 @@ import WorkflowTracker, {
 } from "@/components/shared/WorkflowTracker";
 import DocumentCenter from "@/components/shared/DocumentCenter";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAppStore } from "@/context/AppStore";
+import { motion } from "framer-motion";
 
 const scholarSteps: WorkflowStep[] = [
   { id: "queued", title: "Queued for scholar review", status: "completed" },
@@ -28,23 +28,42 @@ const financeSteps: WorkflowStep[] = [
 const ApplicationStatus = () => {
   const { id } = useParams();
   const { updateApplication } = useAppStore();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#4A0404]/5 via-background to-[#B4925F]/5">
+    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/10">
       <DashboardHeader />
-      <div className="container mx-auto px-8 py-10 space-y-8">
-        <div className="grid grid-cols-2 gap-8">
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+        {/* Workflow Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
           <WorkflowTracker title="Scholar Review" steps={scholarSteps} />
           <WorkflowTracker title="Financial Assessment" steps={financeSteps} />
-        </div>
-        <div className="grid grid-cols-2 gap-8">
-          <Card className="p-6 bg-white/70 backdrop-blur-sm border-[#4A0404]/10">
-            <p className="text-[#4A0404]">
+        </motion.div>
+
+        {/* Notifications + Documents */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
+          <Card className="p-6 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-maroon/20">
+            <h2 className="text-lg font-bold text-maroon mb-3">
+              Notifications
+            </h2>
+            <p className="text-maroon/80 text-sm leading-relaxed">
               Notifications and timestamps will appear here. This is a mock UI
               showing real-time updates once integrated.
             </p>
-            <div className="mt-4 flex items-center space-x-2">
+
+            <div className="mt-6 flex flex-wrap gap-3">
               <Button
-                className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 text-white"
+                className="bg-gradient-to-r from-maroon to-maroon-dark text-white shadow-md hover:shadow-lg"
                 onClick={() =>
                   id &&
                   updateApplication(id, {
@@ -56,16 +75,19 @@ const ApplicationStatus = () => {
               </Button>
               <Button
                 variant="outline"
-                className="text-[#4A0404] border-[#4A0404] hover:bg-[#4A0404]/5"
+                className="text-maroon border-maroon hover:bg-maroon/5"
                 onClick={() =>
                   id &&
-                  updateApplication(id, { status: { finance: "offer" } as any })
+                  updateApplication(id, {
+                    status: { finance: "offer" } as any,
+                  })
                 }
               >
                 Issue Offer Letter
               </Button>
             </div>
           </Card>
+
           <DocumentCenter
             title="Attached Documents"
             documents={[
@@ -85,22 +107,29 @@ const ApplicationStatus = () => {
               },
             ]}
           />
-        </div>
-        <div className="flex items-center space-x-3">
+        </motion.div>
+
+        {/* Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="flex flex-wrap gap-4"
+        >
           <Link to={`/delivery/${id ?? "unknown"}`}>
-            <Button className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 text-white">
+            <Button className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold shadow-md hover:shadow-lg">
               Go to Delivery
             </Button>
           </Link>
           <Link to={`/payments`}>
             <Button
               variant="outline"
-              className="text-[#4A0404] border-[#4A0404] hover:bg-[#4A0404]/5"
+              className="text-maroon border-maroon hover:bg-maroon/5"
             >
               Go to Payments
             </Button>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

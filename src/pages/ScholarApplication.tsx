@@ -12,6 +12,7 @@ import DocumentCenter, {
 import SecureChat from "@/components/shared/SecureChat";
 import { useAppStore } from "@/context/AppStore";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const ScholarApplication = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const ScholarApplication = () => {
 
   const app = applications.find((a) => a.id === id);
 
-  // Local document list for the review session (mock).
+  // Local documents
   const [documents, setDocuments] = useState<DocumentItem[]>(
     app
       ? [
@@ -53,13 +54,15 @@ const ScholarApplication = () => {
     );
   }
 
-  // Scholar workflow with detailed steps
+  // Workflow mapping
   const mapScholarStatusToStep = (s: string) =>
     s === "queued"
       ? "pending"
       : s === "in_review"
       ? "in_progress"
-      : "completed";
+      : s === "approved"
+      ? "completed"
+      : "pending";
 
   const scholarSteps: WorkflowStep[] = [
     {
@@ -89,7 +92,7 @@ const ScholarApplication = () => {
     },
   ];
 
-  // Handlers
+  // Actions
   const handleApprove = () => {
     if (!app) return;
     if (app.type === "murabahah") {
@@ -108,7 +111,6 @@ const ScholarApplication = () => {
       updateApplication(app.id, { status: { scholar: "approved" } } as any);
     }
 
-    // Add Proof of Faith doc
     setDocuments((prev) => [
       ...prev,
       {
@@ -153,21 +155,26 @@ const ScholarApplication = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#4A0404]/5 via-background to-[#B4925F]/5">
+    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/5">
       <DashboardHeader />
-      <div className="container mx-auto px-8 py-10 space-y-8">
-        <div className="grid grid-cols-2 gap-8">
-          {/* Left side */}
+      <div className="container mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
+          {/* Left Side */}
           <div className="space-y-6">
-            <Card className="p-6">
+            <Card className="p-6 bg-white/80 backdrop-blur-md shadow-xl rounded-2xl border border-maroon/10">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-sm text-[#B4925F]">Application ID</p>
-                  <p className="text-[#4A0404] font-semibold">{app.id}</p>
+                  <p className="text-sm text-golden">Application ID</p>
+                  <p className="text-maroon font-semibold">{app.id}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-[#B4925F]">Type</p>
-                  <p className="text-[#4A0404] font-semibold">{app.type}</p>
+                  <p className="text-sm text-golden">Type</p>
+                  <p className="text-maroon font-semibold">{app.type}</p>
                 </div>
               </div>
 
@@ -176,23 +183,23 @@ const ScholarApplication = () => {
                 steps={scholarSteps}
               />
 
-              <div className="mt-4 flex justify-end space-x-3">
+              <div className="mt-6 flex flex-wrap gap-3 justify-end">
                 <Button
                   variant="outline"
-                  className="text-[#4A0404] border-[#4A0404]"
+                  className="text-maroon border-maroon hover:bg-maroon/5"
                   onClick={handleRequestRevision}
                 >
                   Request Revision
                 </Button>
                 <Button
-                  className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 text-white"
+                  className="bg-gradient-to-r from-maroon to-maroon-dark text-white"
                   onClick={handleApprove}
                 >
                   Approve & Issue POF
                 </Button>
                 <Button
                   variant="destructive"
-                  className="bg-red-600 text-white"
+                  className="bg-red-600 hover:bg-red-700 text-white"
                   onClick={handleReject}
                 >
                   Reject Contract
@@ -200,31 +207,43 @@ const ScholarApplication = () => {
               </div>
             </Card>
 
-            <DocumentCenter
-              title="Documents for Review"
-              documents={documents}
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <DocumentCenter
+                title="Documents for Review"
+                documents={documents}
+              />
+            </motion.div>
           </div>
 
-          {/* Right side: Scholar Peer Chat */}
-          <SecureChat
-            title="Scholar Discussion (Peer Consultation)"
-            initialMessages={[
-              {
-                id: "m1",
-                author: "AI Advisor",
-                text: "This contract shows interest-bearing clause at clause 4.2.",
-                time: "now",
-              },
-              {
-                id: "m2",
-                author: "You",
-                text: "Please clarify the profit split in clause 7.",
-                time: "now",
-              },
-            ]}
-          />
-        </div>
+          {/* Right Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <SecureChat
+              title="Scholar Discussion (Peer Consultation)"
+              initialMessages={[
+                {
+                  id: "m1",
+                  author: "AI Advisor",
+                  text: "This contract shows an interest-bearing clause at 4.2.",
+                  time: "now",
+                },
+                {
+                  id: "m2",
+                  author: "You",
+                  text: "Please clarify the profit split in clause 7.",
+                  time: "now",
+                },
+              ]}
+            />
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+// src/App.tsx
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./context/AuthContext";
 import { AppStoreProvider } from "./context/AppStore";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Index from "./pages/Index";
 import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
@@ -21,7 +23,7 @@ import Signup from "./pages/IndividualSignup";
 import SignupIndex from "./pages/SignupIndex";
 import Notifications from "./pages/Notifications";
 import VehicleServices from "./pages/VehicleServices";
-import AuditLog from "./pages/AuditLog";
+// import AuditLog from "./pages/AuditLog";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import BusinessSignup from "./pages/BusinessSignup";
 import ServiceProviderSignup from "./pages/ServiceProviderSignup";
@@ -29,8 +31,8 @@ import Investments from "./pages/Investments";
 import ProposalNew from "./pages/ProposalNew";
 import MusharakahConvert from "./pages/MusharakahConvert";
 import BusinessStatus from "./pages/BusinessStatus";
-import BusinessDashboard from "./pages/BusinessDashboard";
-import ProviderDashboard from "./pages/ProviderDashboard";
+// import BusinessDashboard from "./pages/BusinessDashboard";
+import ProviderDashboard from "./pages/ServiceProviderDashboard";
 import ScholarSignup from "./pages/ScholarSignup";
 import ScholarDashboard from "./pages/ScholarDashboard";
 import ScholarApplication from "./pages/ScholarApplication";
@@ -43,6 +45,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminSystemOversight from "./pages/AdminSystemOversight";
 import AdminUserManagement from "./pages/AdminUserManagement";
 import AdminAnalytics from "./pages/AdminAnalytics";
+import AdminComplianceHub from "./pages/AdminComplianceHub";
+import AdminManageAccess from "./pages/AdminManageAccess";
 import IndividualSignup from "./pages/IndividualSignup";
 
 const queryClient = new QueryClient();
@@ -155,14 +159,14 @@ const App = () => (
                   </ProtectedRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/business/dashboard"
                 element={
                   <ProtectedRoute allow={["business"]}>
                     <BusinessDashboard />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
               <Route
                 path="/vehicle-services"
                 element={
@@ -171,14 +175,14 @@ const App = () => (
                   </ProtectedRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/audit"
                 element={
                   <ProtectedRoute>
                     <AuditLog />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
               {/* Business routes */}
               <Route
                 path="/investments"
@@ -247,7 +251,7 @@ const App = () => (
               <Route
                 path="/capital/dashboard"
                 element={
-                  <ProtectedRoute allow={["capital"]}>
+                  <ProtectedRoute allow={["capitalProvider"]}>
                     <CapitalProviderDashboard />
                   </ProtectedRoute>
                 }
@@ -255,7 +259,7 @@ const App = () => (
               <Route
                 path="/capital/applications/:id"
                 element={
-                  <ProtectedRoute allow={["capital"]}>
+                  <ProtectedRoute allow={["capitalProvider"]}>
                     <CapitalProviderApplication />
                   </ProtectedRoute>
                 }
@@ -263,7 +267,7 @@ const App = () => (
               <Route
                 path="/capital/portfolio/:id"
                 element={
-                  <ProtectedRoute allow={["capital"]}>
+                  <ProtectedRoute allow={["capitalProvider"]}>
                     <CapitalProviderPortfolio />
                   </ProtectedRoute>
                 }
@@ -298,6 +302,22 @@ const App = () => (
                 element={
                   <ProtectedRoute allow={["admin"]}>
                     <AdminAnalytics />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/compliance"
+                element={
+                  <ProtectedRoute allow={["admin"]}>
+                    <AdminComplianceHub />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/permissions"
+                element={
+                  <ProtectedRoute allow={["admin"]}>
+                    <AdminManageAccess />
                   </ProtectedRoute>
                 }
               />

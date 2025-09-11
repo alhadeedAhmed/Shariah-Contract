@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { CheckCircle, Clock } from "lucide-react";
+import { CheckCircle2, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 
 export type WorkflowStep = {
   id: string;
@@ -14,9 +15,9 @@ interface WorkflowTrackerProps {
 }
 
 const statusToColor: Record<WorkflowStep["status"], string> = {
-  pending: "bg-[#4A0404]/10 text-[#4A0404]",
-  in_progress: "bg-[#B4925F]/15 text-[#B4925F]",
-  completed: "bg-green-100 text-green-700",
+  pending: "bg-maroon/10 text-maroon border border-maroon/20",
+  in_progress: "bg-golden/15 text-golden border border-golden/30",
+  completed: "bg-green-100 text-green-700 border border-green-300",
 };
 
 export const WorkflowTracker = ({
@@ -24,45 +25,68 @@ export const WorkflowTracker = ({
   steps,
 }: WorkflowTrackerProps) => {
   return (
-    <Card className="p-6 bg-white/70 backdrop-blur-sm border-[#4A0404]/10">
-      <div className="flex items-center space-x-3 mb-5">
-        <div className="h-6 w-6 rounded-lg border-2 border-[#4A0404]" />
-        <h3 className="text-xl font-semibold text-[#4A0404] tracking-tight">
-          {title}
-        </h3>
-      </div>
-      <ol className="space-y-4">
-        {steps.map((step, index) => (
-          <li key={step.id} className="flex items-start space-x-4">
-            <div className="flex flex-col items-center">
-              {step.status === "completed" ? (
-                <CheckCircle className="h-5 w-5 text-green-600" />
-              ) : (
-                <Clock className="h-5 w-5 text-[#B4925F]" />
-              )}
-              {index < steps.length - 1 && (
-                <div className="w-px h-8 bg-gradient-to-b from-[#4A0404]/20 to-transparent mt-1" />
-              )}
-            </div>
-            <div>
-              <div
-                className={`inline-flex items-center text-xs font-medium px-2 py-1 rounded ${
-                  statusToColor[step.status]
-                }`}
-              >
-                {step.status.replace("_", " ")}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/20 rounded-2xl shadow-lg">
+        {/* Header */}
+        <div className="flex items-center space-x-3 mb-6">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="h-8 w-8 rounded-lg border-2 border-maroon flex items-center justify-center bg-maroon/5"
+          />
+          <h3 className="text-xl font-bold text-maroon tracking-tight">
+            {title}
+          </h3>
+        </div>
+
+        {/* Steps */}
+        <ol className="space-y-6">
+          {steps.map((step, index) => (
+            <motion.li
+              key={step.id}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.2 }}
+              className="flex items-start space-x-4"
+            >
+              {/* Icon + Connector */}
+              <div className="flex flex-col items-center">
+                {step.status === "completed" ? (
+                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+                ) : (
+                  <Clock className="h-6 w-6 text-golden" />
+                )}
+                {index < steps.length - 1 && (
+                  <div className="w-px h-8 bg-gradient-to-b from-maroon/30 to-transparent mt-1" />
+                )}
               </div>
-              <p className="text-[#4A0404] font-medium mt-2">{step.title}</p>
-              {step.description && (
-                <p className="text-sm text-[#B4925F] mt-1">
-                  {step.description}
+
+              {/* Content */}
+              <div>
+                <div
+                  className={`inline-flex items-center text-xs font-semibold px-3 py-1 rounded-lg capitalize ${
+                    statusToColor[step.status]
+                  }`}
+                >
+                  {step.status.replace("_", " ")}
+                </div>
+                <p className="text-maroon font-semibold text-lg mt-2">
+                  {step.title}
                 </p>
-              )}
-            </div>
-          </li>
-        ))}
-      </ol>
-    </Card>
+                {step.description && (
+                  <p className="text-sm text-golden mt-1">{step.description}</p>
+                )}
+              </div>
+            </motion.li>
+          ))}
+        </ol>
+      </Card>
+    </motion.div>
   );
 };
 
