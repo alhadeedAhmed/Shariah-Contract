@@ -21,13 +21,13 @@ const CapitalProviderPortfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/10">
+    <div className="min-h-screen bg-gradient-to-br from-adalah-dark/5 via-background to-adalah-golden/10">
       <DashboardHeader />
 
       <div className="container mx-auto px-4 md:px-8 py-10 space-y-10">
         {/* Title */}
         <motion.h1
-          className="text-2xl md:text-3xl font-bold text-maroon"
+          className="text-2xl md:text-3xl font-bold text-adalah-dark"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -41,8 +41,8 @@ const CapitalProviderPortfolio = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-lg border border-maroon/10 rounded-2xl shadow-md space-y-3">
-            <h2 className="text-xl font-semibold text-maroon">
+          <Card className="p-6 bg-white/90 backdrop-blur-lg border border-adalah-dark/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-adalah-dark">
               Fund Disbursement
             </h2>
             <p className="text-golden">Funds disbursed successfully</p>
@@ -60,24 +60,24 @@ const CapitalProviderPortfolio = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-lg border border-maroon/10 rounded-2xl shadow-md space-y-3">
-            <h2 className="text-xl font-semibold text-maroon">
+          <Card className="p-6 bg-white/90 backdrop-blur-lg border border-adalah-dark/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-adalah-dark">
               Monitoring & Compliance
             </h2>
             <p className="text-sm text-golden">
               Current status:{" "}
-              <span className="text-maroon font-semibold">{status}</span>
+              <span className="text-adalah-dark font-semibold">{status}</span>
             </p>
             <div className="flex flex-wrap gap-3 mt-4">
               <Button
-                className="bg-gradient-to-r from-maroon to-maroon-dark text-white hover:opacity-90"
+                className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white hover:opacity-90"
                 onClick={() => setStatus("compliant")}
               >
                 Mark Compliant
               </Button>
               <Button
                 variant="outline"
-                className="text-maroon border-maroon hover:bg-maroon/5"
+                className="text-adalah-dark border-adalah-dark hover:bg-adalah-dark/5"
                 onClick={() => setStatus("follow-up required")}
               >
                 Mark Follow-Up
@@ -92,16 +92,16 @@ const CapitalProviderPortfolio = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-lg border border-maroon/10 rounded-2xl shadow-md space-y-4">
-            <h2 className="text-xl font-semibold text-maroon">Reports</h2>
+          <Card className="p-6 bg-white/90 backdrop-blur-lg border border-adalah-dark/10 rounded-2xl shadow-md space-y-4">
+            <h2 className="text-xl font-semibold text-adalah-dark">Reports</h2>
             <Button
-              className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold hover:opacity-90"
+              className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold hover:opacity-90"
               onClick={handleGenerateReport}
             >
               Generate Performance Report
             </Button>
             {reports.length > 0 && (
-              <ul className="mt-4 text-sm text-golden list-disc pl-6 space-y-1">
+              <ul className="mt-4 text-sm text-adalah-golden list-disc pl-6 space-y-1">
                 {reports.map((r, i) => (
                   <li key={i}>{r}</li>
                 ))}
@@ -118,7 +118,7 @@ const CapitalProviderPortfolio = () => {
         >
           <Button
             variant="outline"
-            className="text-maroon border-maroon hover:bg-maroon/5"
+            className="text-adalah-dark border-adalah-dark hover:bg-adalah-dark/5"
             onClick={() => navigate("/capital/dashboard")}
           >
             ← Back to Dashboard

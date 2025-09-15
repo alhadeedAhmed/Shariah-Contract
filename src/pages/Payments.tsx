@@ -13,7 +13,7 @@ const schedule = [
 
 const Payments = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#4A0404]/5 via-background to-[#B4925F]/5">
+    <div className="min-h-screen bg-gradient-to-br from-adalah-primary/5 via-background to-adalah-golden/10">
       <DashboardHeader />
       <div className="container mx-auto px-4 sm:px-8 py-10 space-y-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -23,12 +23,14 @@ const Payments = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/20 rounded-2xl shadow-lg">
+            <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-primary/20 rounded-2xl shadow-lg">
               <div className="flex items-center space-x-3 mb-4">
-                <CreditCard className="h-6 w-6 text-maroon" />
-                <h2 className="text-xl font-bold text-maroon">SATpay</h2>
+                <CreditCard className="h-6 w-6 text-adalah-primary" />
+                <h2 className="text-xl font-bold text-adalah-primary font-inter-tight">
+                  SATpay
+                </h2>
               </div>
-              <p className="text-sm text-golden">
+              <p className="text-sm text-adalah-golden">
                 Make installment payments securely.
               </p>
 
@@ -39,13 +41,15 @@ const Payments = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-xl border border-maroon/20 bg-white shadow-sm"
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-xl border border-adalah-primary/20 bg-white shadow-sm"
                   >
-                    <span className="text-maroon font-medium">{s.due}</span>
-                    <span className="text-maroon font-semibold text-lg">
+                    <span className="text-adalah-primary font-medium">
+                      {s.due}
+                    </span>
+                    <span className="text-adalah-primary font-semibold text-lg">
                       ${s.amount}
                     </span>
-                    <Button className="bg-gradient-to-r from-maroon to-maroon/90 text-white shadow-md rounded-xl px-6">
+                    <Button className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white shadow-md rounded-xl px-6">
                       Pay
                     </Button>
                   </motion.div>
@@ -61,21 +65,23 @@ const Payments = () => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-2"
           >
-            <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/20 rounded-2xl shadow-lg">
+            <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-primary/20 rounded-2xl shadow-lg">
               <div className="flex items-center space-x-3 mb-4">
-                <Settings className="h-6 w-6 text-maroon" />
-                <h2 className="text-xl font-bold text-maroon">Settings</h2>
+                <Settings className="h-6 w-6 text-adalah-primary" />
+                <h2 className="text-xl font-bold text-adalah-primary font-inter-tight">
+                  Settings
+                </h2>
               </div>
 
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-xl border border-maroon/20 bg-white shadow-sm"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-xl border border-adalah-primary/20 bg-white shadow-sm"
               >
                 <div>
-                  <p className="text-maroon font-medium">Autopay</p>
-                  <p className="text-sm text-golden">
+                  <p className="text-adalah-primary font-medium">Autopay</p>
+                  <p className="text-sm text-adalah-golden">
                     Automatically pay installments on due date.
                   </p>
                 </div>

@@ -53,16 +53,16 @@ const FeaturesSection = () => {
   return (
     <section
       id="features"
-      className="py-24 relative bg-gradient-to-b from-background via-golden/5 to-background overflow-hidden"
+      className="py-24 relative bg-gradient-to-b from-background via-adalah-golden/5 to-background overflow-hidden"
     >
       {/* Glowing Background Shapes */}
       <motion.div
-        className="absolute -top-24 -left-24 w-96 h-96 bg-golden/10 rounded-full blur-3xl"
+        className="absolute -top-24 -left-24 w-96 h-96 bg-adalah-golden/10 rounded-full blur-3xl"
         animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute -bottom-24 -right-24 w-80 h-80 bg-maroon/10 rounded-full blur-3xl"
+        className="absolute -bottom-24 -right-24 w-80 h-80 bg-adalah-primary/10 rounded-full blur-3xl"
         animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.3, 0.1] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -76,7 +76,7 @@ const FeaturesSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-maroon mb-6">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-adalah-primary mb-6 font-inter-tight">
             Comprehensive Islamic Finance Platform
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
@@ -95,16 +95,16 @@ const FeaturesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="group relative bg-white/60 backdrop-blur-md rounded-2xl shadow-lg border border-golden/20 p-8 hover:shadow-xl hover:border-golden/40 transition-all"
+              className="group relative bg-white/60 backdrop-blur-md rounded-2xl shadow-lg border border-adalah-golden/20 p-8 hover:shadow-xl hover:border-adalah-golden/40 transition-all"
             >
               {/* Icon */}
               <div className="flex items-center justify-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-golden/20 to-maroon/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <feature.icon className="h-8 w-8 text-maroon" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-adalah-golden/20 to-adalah-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <feature.icon className="h-8 w-8 text-adalah-primary" />
                 </div>
               </div>
               {/* Title */}
-              <h3 className="text-xl font-semibold text-maroon mb-3 group-hover:text-maroon-light transition-colors">
+              <h3 className="text-xl font-semibold text-adalah-primary mb-3 group-hover:text-adalah-primary/80 transition-colors font-inter-tight">
                 {feature.title}
               </h3>
               {/* Description */}
@@ -126,9 +126,11 @@ const FeaturesSection = () => {
           {extraHighlights.map((item, i) => (
             <div
               key={i}
-              className="bg-gradient-to-r from-maroon/5 to-golden/5 rounded-xl p-6 text-center shadow-md hover:shadow-lg transition"
+              className="bg-gradient-to-r from-adalah-primary/5 to-adalah-golden/5 rounded-xl p-6 text-center shadow-md hover:shadow-lg transition"
             >
-              <h4 className="font-semibold text-maroon mb-2">{item.title}</h4>
+              <h4 className="font-semibold text-adalah-primary mb-2 font-inter-tight">
+                {item.title}
+              </h4>
               <p className="text-sm text-muted-foreground">{item.desc}</p>
             </div>
           ))}

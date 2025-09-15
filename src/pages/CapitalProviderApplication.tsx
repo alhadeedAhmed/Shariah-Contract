@@ -25,12 +25,12 @@ const CapitalProviderApplication = () => {
   const [offerIssued, setOfferIssued] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/10">
+    <div className="min-h-screen bg-gradient-to-br from-adalah-dark/5 via-background to-adalah-golden/10">
       <DashboardHeader />
       <div className="container mx-auto px-4 md:px-8 py-10 space-y-10">
         {/* Page Title */}
         <motion.h1
-          className="text-2xl md:text-3xl font-bold text-maroon"
+          className="text-2xl md:text-3xl font-bold text-adalah-dark"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -44,8 +44,10 @@ const CapitalProviderApplication = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-3">
-            <h2 className="text-xl font-semibold text-maroon">Due Diligence</h2>
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-dark/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-adalah-dark">
+              Due Diligence
+            </h2>
             <ul className="text-sm text-golden list-disc pl-6 space-y-1">
               <li>KYC documents verified</li>
               <li>Collateral evaluated: Factory Equipment</li>
@@ -60,8 +62,8 @@ const CapitalProviderApplication = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-3">
-            <h2 className="text-xl font-semibold text-maroon">
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-dark/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-adalah-dark">
               Terms & Conditions
             </h2>
             <ul className="text-sm text-golden list-disc pl-6 space-y-1">
@@ -78,15 +80,17 @@ const CapitalProviderApplication = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-3">
-            <h2 className="text-xl font-semibold text-maroon">Offer Letter</h2>
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-dark/10 rounded-2xl shadow-md space-y-3">
+            <h2 className="text-xl font-semibold text-adalah-dark">
+              Offer Letter
+            </h2>
             {offerIssued ? (
               <p className="text-golden">
                 Offer Letter issued — Terms confirmed with borrower.
               </p>
             ) : (
               <Button
-                className="bg-gradient-to-r from-maroon to-maroon-dark text-white hover:opacity-90"
+                className="bg-gradient-to-r from-adalah-dark to-adalah-golden text-white hover:opacity-90"
                 onClick={() => setOfferIssued(true)}
               >
                 Issue Offer Letter
@@ -101,13 +105,13 @@ const CapitalProviderApplication = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/10 rounded-2xl shadow-md space-y-4 overflow-x-auto">
-            <h2 className="text-xl font-semibold text-maroon">
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-dark/10 rounded-2xl shadow-md space-y-4 overflow-x-auto">
+            <h2 className="text-xl font-semibold text-adalah-dark">
               Repayment Schedule
             </h2>
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="text-left text-maroon border-b border-golden/40">
+                <tr className="text-left text-adalah-dark border-b border-adalah-golden/40">
                   <th className="py-2 px-2">Due Date</th>
                   <th className="py-2 px-2">Amount</th>
                   <th className="py-2 px-2">Status</th>
@@ -117,7 +121,7 @@ const CapitalProviderApplication = () => {
                 {repayments.map((r, i) => (
                   <tr
                     key={i}
-                    className="border-b border-golden/20 hover:bg-golden/5 transition"
+                    className="border-b border-adalah-golden/20 hover:bg-adalah-golden/5 transition"
                   >
                     <td className="py-2 px-2">{r.dueDate}</td>
                     <td className="py-2 px-2">${r.amount.toLocaleString()}</td>
@@ -149,7 +153,7 @@ const CapitalProviderApplication = () => {
         >
           <Button
             variant="outline"
-            className="text-maroon border-maroon hover:bg-maroon/5"
+            className="text-adalah-dark border-adalah-dark hover:bg-adalah-dark/5"
             onClick={() => navigate("/capital/dashboard")}
           >
             ← Back to Dashboard

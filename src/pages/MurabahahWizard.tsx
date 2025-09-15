@@ -33,7 +33,7 @@ const MurabahahWizard = () => {
   const { createMurabahahApplication } = useAppStore();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/10">
+    <div className="min-h-screen bg-gradient-to-br from-adalah-primary/5 via-background to-adalah-golden/10">
       <DashboardHeader />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
@@ -46,52 +46,54 @@ const MurabahahWizard = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Card className="p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-maroon/20">
+              <Card className="p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-adalah-primary/20">
                 <div className="flex items-center space-x-3 mb-6">
-                  <div className="h-8 w-8 rounded-lg border-2 border-maroon flex items-center justify-center">
-                    <span className="text-maroon text-sm font-bold">1</span>
+                  <div className="h-8 w-8 rounded-lg border-2 border-adalah-primary flex items-center justify-center">
+                    <span className="text-adalah-primary text-sm font-bold">
+                      1
+                    </span>
                   </div>
-                  <h1 className="text-2xl font-bold text-maroon tracking-tight">
+                  <h1 className="text-2xl font-bold text-adalah-primary tracking-tight font-inter-tight">
                     Transaction Details
                   </h1>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-maroon mb-2">
+                    <label className="block text-sm font-medium text-adalah-primary mb-2">
                       Vehicle
                     </label>
                     <Input
                       placeholder="e.g., Toyota Corolla 2023"
-                      className="border-maroon/20 focus:border-golden focus:ring-golden/30"
+                      className="border-adalah-primary/20 focus:border-adalah-golden focus:ring-adalah-golden/30"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-maroon mb-2">
+                    <label className="block text-sm font-medium text-adalah-primary mb-2">
                       Price (USD)
                     </label>
                     <Input
                       type="number"
                       placeholder="21000"
-                      className="border-maroon/20 focus:border-golden focus:ring-golden/30"
+                      className="border-adalah-primary/20 focus:border-adalah-golden focus:ring-adalah-golden/30"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-maroon mb-2">
+                    <label className="block text-sm font-medium text-adalah-primary mb-2">
                       Down Payment
                     </label>
                     <Input
                       type="number"
                       placeholder="3000"
-                      className="border-maroon/20 focus:border-golden focus:ring-golden/30"
+                      className="border-adalah-primary/20 focus:border-adalah-golden focus:ring-adalah-golden/30"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-maroon mb-2">
+                    <label className="block text-sm font-medium text-adalah-primary mb-2">
                       Repayment Period
                     </label>
                     <Select>
-                      <SelectTrigger className="border-maroon/20 focus:border-golden focus:ring-golden/30">
+                      <SelectTrigger className="border-adalah-primary/20 focus:border-adalah-golden focus:ring-adalah-golden/30">
                         <SelectValue placeholder="12 months" />
                       </SelectTrigger>
                       <SelectContent>
@@ -102,18 +104,18 @@ const MurabahahWizard = () => {
                     </Select>
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-maroon mb-2">
+                    <label className="block text-sm font-medium text-adalah-primary mb-2">
                       Purpose / Notes
                     </label>
                     <Textarea
                       placeholder="Describe purpose and specifics"
-                      className="border-maroon/20 min-h-[100px] focus:border-golden focus:ring-golden/30"
+                      className="border-adalah-primary/20 min-h-[100px] focus:border-adalah-golden focus:ring-adalah-golden/30"
                     />
                   </div>
                 </div>
 
                 <div className="mt-6 flex justify-end">
-                  <Button className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold shadow-md hover:shadow-lg">
+                  <Button className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold shadow-md hover:shadow-lg">
                     Run AI Analysis
                   </Button>
                 </div>
@@ -126,8 +128,8 @@ const MurabahahWizard = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <Card className="p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-maroon/20">
-                <h2 className="text-xl font-bold text-maroon mb-6 tracking-tight">
+              <Card className="p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-adalah-primary/20">
+                <h2 className="text-xl font-bold text-adalah-primary mb-6 tracking-tight font-inter-tight">
                   AI Analysis Results
                 </h2>
 
@@ -140,10 +142,12 @@ const MurabahahWizard = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: i * 0.1 }}
-                        className="p-4 rounded-xl border border-golden/30 bg-gradient-to-br from-golden/20 to-white/80 text-center shadow-sm"
+                        className="p-4 rounded-xl border border-adalah-golden/30 bg-gradient-to-br from-adalah-golden/20 to-white/80 text-center shadow-sm"
                       >
-                        <p className="text-sm font-medium text-maroon">{t}</p>
-                        <p className="text-xs text-golden mt-1">
+                        <p className="text-sm font-medium text-adalah-primary">
+                          {t}
+                        </p>
+                        <p className="text-xs text-adalah-golden mt-1">
                           Mock result: PASS
                         </p>
                       </motion.div>
@@ -154,11 +158,11 @@ const MurabahahWizard = () => {
                 <div className="mt-8 flex justify-end space-x-3">
                   <Button
                     variant="outline"
-                    className="text-maroon border-maroon hover:bg-maroon/5"
+                    className="text-adalah-primary border-adalah-primary hover:bg-adalah-primary/5"
                   >
                     Back
                   </Button>
-                  <Button className="bg-gradient-to-r from-maroon to-maroon-dark text-white shadow-md hover:shadow-lg">
+                  <Button className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white shadow-md hover:shadow-lg">
                     Generate Contract
                   </Button>
                 </div>
@@ -171,12 +175,12 @@ const MurabahahWizard = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <Card className="p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-maroon/20">
-                <h2 className="text-xl font-bold text-maroon mb-6 tracking-tight">
+              <Card className="p-8 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-adalah-primary/20">
+                <h2 className="text-xl font-bold text-adalah-primary mb-6 tracking-tight font-inter-tight">
                   Generated Contract (Preview)
                 </h2>
 
-                <div className="space-y-3 text-sm text-maroon">
+                <div className="space-y-3 text-sm text-adalah-primary">
                   <p>
                     <strong>Asset:</strong> Vehicle (details as provided)
                   </p>
@@ -188,7 +192,7 @@ const MurabahahWizard = () => {
                   <p>
                     <strong>Installments:</strong> 12 months • $1,900 / month
                   </p>
-                  <p className="text-golden text-sm">
+                  <p className="text-adalah-golden text-sm">
                     Shariah note: Ownership transfer and price transparency
                     ensured. Riba avoided through cost-plus sale.
                   </p>
@@ -197,12 +201,12 @@ const MurabahahWizard = () => {
                 <div className="mt-8 flex justify-end space-x-3">
                   <Button
                     variant="outline"
-                    className="text-maroon border-maroon hover:bg-maroon/5"
+                    className="text-adalah-primary border-adalah-primary hover:bg-adalah-primary/5"
                   >
                     Modify Terms
                   </Button>
                   <Button
-                    className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold shadow-md hover:shadow-lg"
+                    className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold shadow-md hover:shadow-lg"
                     onClick={() => {
                       const app = createMurabahahApplication();
                       navigate(`/applications/${app.id}`);

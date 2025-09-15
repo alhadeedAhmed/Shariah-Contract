@@ -42,15 +42,15 @@ const roles = [
 
 const SignupIndex = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-maroon/10 via-background to-golden/10 px-4 py-16 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-adalah-primary/10 via-background to-adalah-golden/10 px-4 py-16 relative overflow-hidden">
       {/* Background Glow */}
       <motion.div
-        className="absolute top-24 left-16 w-72 h-72 bg-golden/30 rounded-full blur-3xl"
+        className="absolute top-24 left-16 w-72 h-72 bg-adalah-golden/30 rounded-full blur-3xl"
         animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-24 right-16 w-80 h-80 bg-maroon/25 rounded-full blur-3xl"
+        className="absolute bottom-24 right-16 w-80 h-80 bg-adalah-primary/25 rounded-full blur-3xl"
         animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.15, 0.3] }}
         transition={{
           duration: 10,
@@ -61,17 +61,17 @@ const SignupIndex = () => {
       />
 
       {/* Main Container */}
-      <Card className="w-full max-w-7xl -mt-7 p-10 bg-white/90 backdrop-blur-lg border border-maroon/20 shadow-2xl rounded-3xl relative z-10">
+      <Card className="w-full max-w-7xl -mt-7 p-10 bg-white/90 backdrop-blur-lg border border-adalah-primary/20 shadow-2xl rounded-3xl relative z-10">
         {/* Header */}
         <div className="flex items-center space-x-3 mb-5">
-          <div className="w-12 h-12 bg-gradient-to-br from-golden to-golden-light rounded-xl flex items-center justify-center shadow-md">
-            <Shield className="h-6 w-6 text-maroon" />
+          <div className="w-12 h-12 bg-gradient-to-br from-adalah-golden to-adalah-dark rounded-xl flex items-center justify-center shadow-md">
+            <Shield className="h-6 w-6 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-maroon tracking-tight">
+          <h1 className="text-3xl font-bold text-adalah-primary tracking-tight font-inter-tight">
             Create Your Account
           </h1>
         </div>
-        <p className="text-golden mb-6 text-lg">
+        <p className="text-adalah-golden mb-6 text-lg">
           Choose your role to continue with onboarding.
         </p>
 
@@ -88,11 +88,11 @@ const SignupIndex = () => {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.04 }}
               >
-                <Card className="p-6 rounded-2xl overflow-hidden relative shadow-lg group cursor-pointer h-full bg-maroon border border-golden/30 hover:border-golden/60 transition-all duration-300">
+                <Card className="p-6 rounded-2xl overflow-hidden relative shadow-lg group cursor-pointer h-full bg-adalah-primary border border-adalah-golden/30 hover:border-adalah-golden/60 transition-all duration-300">
                   {/* Icon + Title */}
                   <div className="relative flex items-center space-x-4 mb-4">
-                    <div className="w-14 h-14 bg-golden/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-7 w-7 text-golden" />
+                    <div className="w-14 h-14 bg-adalah-golden/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-7 w-7 text-white" />
                     </div>
                     <p className="text-xl font-semibold text-white">
                       {role.title}
@@ -107,7 +107,7 @@ const SignupIndex = () => {
                   {/* CTA */}
                   <div className="relative">
                     <Link to={role.link}>
-                      <Button className="w-full bg-gradient-to-r from-golden to-golden-light text-maroon font-semibold rounded-xl shadow-md hover:shadow-xl transition-all">
+                      <Button className="w-full bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold rounded-xl shadow-md hover:shadow-xl transition-all">
                         Continue as {role.title}
                       </Button>
                     </Link>

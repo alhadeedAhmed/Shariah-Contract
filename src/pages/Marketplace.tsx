@@ -27,7 +27,7 @@ const Marketplace = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/5">
+    <div className="min-h-screen bg-gradient-to-br from-adalah-primary/5 via-background to-adalah-golden/5">
       <DashboardHeader />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Header Card */}
@@ -36,24 +36,24 @@ const Marketplace = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/20 shadow-lg rounded-2xl">
+          <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-primary/20 shadow-lg rounded-2xl">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="flex items-center space-x-3">
-                <div className="h-8 w-8 rounded-lg border-2 border-maroon flex items-center justify-center">
-                  <Car className="h-5 w-5 text-maroon" />
+                <div className="h-8 w-8 rounded-lg border-2 border-adalah-primary flex items-center justify-center">
+                  <Car className="h-5 w-5 text-adalah-primary" />
                 </div>
-                <h1 className="text-2xl font-bold text-maroon tracking-tight">
+                <h1 className="text-2xl font-bold text-adalah-primary tracking-tight font-inter-tight">
                   Marketplace
                 </h1>
               </div>
               <div className="flex items-center space-x-2 w-full md:w-auto">
                 <Input
                   placeholder="Search vehicles..."
-                  className="w-full md:w-64 border-maroon/20 focus:border-golden focus:ring-golden/30"
+                  className="w-full md:w-64 border-adalah-primary/20 focus:border-adalah-golden focus:ring-adalah-golden/30"
                 />
                 <Button
                   variant="outline"
-                  className="text-maroon border-maroon hover:bg-maroon/5"
+                  className="text-adalah-primary border-adalah-primary hover:bg-adalah-primary/5"
                 >
                   <Search className="h-4 w-4" />
                 </Button>
@@ -73,21 +73,21 @@ const Marketplace = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ scale: 1.03 }}
             >
-              <Card className="p-6 bg-white/90 backdrop-blur-md border border-maroon/20 shadow-md hover:shadow-xl transition-all rounded-2xl flex flex-col justify-between h-full">
+              <Card className="p-6 bg-white/90 backdrop-blur-md border border-adalah-primary/20 shadow-md hover:shadow-xl transition-all rounded-2xl flex flex-col justify-between h-full">
                 {/* Vehicle Info */}
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-golden/20 to-golden/10">
-                    <Car className="h-6 w-6 text-maroon" />
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-adalah-golden/20 to-adalah-golden/10">
+                    <Car className="h-6 w-6 text-adalah-primary" />
                   </div>
                   <div>
-                    <p className="text-maroon font-semibold text-lg">
+                    <p className="text-adalah-primary font-semibold text-lg font-inter-tight">
                       {v.make} {v.model}
                     </p>
-                    <p className="text-sm text-golden">{v.year}</p>
+                    <p className="text-sm text-adalah-golden">{v.year}</p>
                   </div>
                 </div>
 
-                <p className="text-2xl font-bold text-maroon mb-6 tracking-tight">
+                <p className="text-2xl font-bold text-adalah-primary mb-6 tracking-tight font-inter-tight">
                   ${v.price.toLocaleString()}
                 </p>
 
@@ -97,27 +97,27 @@ const Marketplace = () => {
                     <DialogTrigger asChild>
                       <Button
                         variant="outline"
-                        className="flex-1 bg-gradient-to-r from-golden to-golden-dark text-maroon"
+                        className="w-full border-b border-adalah-dark text-adalah-dark"
                       >
-                        <FileText className="h-4 w-4 mr-2" /> Get Quote
+                        <FileText className="h-4 w-4" /> Get Quote
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[520px] rounded-2xl">
                       <DialogHeader>
-                        <DialogTitle className="text-maroon">
+                        <DialogTitle className="text-adalah-primary font-inter-tight">
                           Request Quote
                         </DialogTitle>
                       </DialogHeader>
                       <div className="space-y-3 text-sm">
-                        <p className="text-maroon font-medium">
+                        <p className="text-adalah-primary font-medium font-inter-tight">
                           {v.make} {v.model} • {v.year}
                         </p>
-                        <p className="text-golden">
+                        <p className="text-adalah-golden">
                           Price: ${v.price.toLocaleString()}
                         </p>
                         <Button
                           onClick={() => setSelected(v)}
-                          className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold w-full shadow-md hover:shadow-lg"
+                          className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold w-full shadow-md hover:shadow-lg"
                         >
                           Confirm Quote Request
                         </Button>
@@ -135,7 +135,7 @@ const Marketplace = () => {
                     to={`/murabahah/new?vehicle=${v.id}`}
                     className="flex-1"
                   >
-                    <Button className="w-full bg-gradient-to-r from-maroon to-maroon-dark text-white shadow-md hover:shadow-lg">
+                    <Button className="w-full bg-gradient-to-r from-adalah-golden to-adalah-dark text-white shadow-md hover:shadow-lg">
                       Start Murabahah
                     </Button>
                   </Link>

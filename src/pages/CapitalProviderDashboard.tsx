@@ -73,13 +73,13 @@ const CapitalProviderDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/10">
+    <div className="min-h-screen bg-gradient-to-br from-adalah-dark/5 via-background to-adalah-golden/10">
       <DashboardHeader />
       <div className="container mx-auto px-4 md:px-8 py-10 space-y-10">
         {/* Header */}
         <div className="flex items-center space-x-3">
-          <div className="h-6 w-6 rounded-lg border-2 border-maroon" />
-          <h1 className="text-2xl md:text-3xl font-bold text-maroon">
+          <div className="h-6 w-6 rounded-lg border-2 border-adalah-dark" />
+          <h1 className="text-2xl md:text-3xl font-bold text-adalah-dark">
             Capital Provider Dashboard
           </h1>
         </div>
@@ -91,12 +91,12 @@ const CapitalProviderDashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-maroon/10">
-              <h2 className="text-xl font-semibold text-maroon mb-3">
+            <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-adalah-dark/10">
+              <h2 className="text-xl font-semibold text-adalah-dark mb-3">
                 Risk Profile Setup
               </h2>
               {riskProfile ? (
-                <ul className="text-sm text-golden space-y-1">
+                <ul className="text-sm text-adalah-golden space-y-1">
                   <li>Parameters: {riskProfile.riskParameters}</li>
                   <li>Criteria: {riskProfile.lendingCriteria}</li>
                   <li>Products: {riskProfile.products}</li>
@@ -105,7 +105,7 @@ const CapitalProviderDashboard = () => {
               ) : (
                 <Button
                   onClick={handleSetRiskProfile}
-                  className="mt-4 bg-gradient-to-r from-maroon to-maroon-dark text-white hover:opacity-90"
+                  className="mt-4 bg-gradient-to-r from-adalah-dark to-adalah-golden text-white hover:opacity-90"
                 >
                   Configure Risk Profile
                 </Button>
@@ -118,11 +118,11 @@ const CapitalProviderDashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-maroon/10">
-              <h2 className="text-xl font-semibold text-maroon mb-3">
+            <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-adalah-dark/10">
+              <h2 className="text-xl font-semibold text-adalah-dark mb-3">
                 Institution Status
               </h2>
-              <p className="text-golden">
+              <p className="text-adalah-golden">
                 Institution registered and compliance verified
               </p>
             </Card>
@@ -131,7 +131,7 @@ const CapitalProviderDashboard = () => {
 
         {/* Phase 2: Applications */}
         <div>
-          <h2 className="text-2xl font-bold text-maroon mb-4">
+          <h2 className="text-2xl font-bold text-adalah-dark mb-4">
             Financing Applications
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -142,19 +142,21 @@ const CapitalProviderDashboard = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-maroon/10 space-y-3">
-                  <p className="text-sm text-golden">ID: {app.id}</p>
-                  <p className="text-maroon font-semibold">{app.borrower}</p>
-                  <p className="text-sm text-golden">
+                <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-adalah-dark/10 space-y-3">
+                  <p className="text-sm text-adalah-golden">ID: {app.id}</p>
+                  <p className="text-adalah-dark font-semibold">
+                    {app.borrower}
+                  </p>
+                  <p className="text-sm text-adalah-golden">
                     Amount: ${app.amount.toLocaleString()}
                   </p>
-                  <p className="text-sm text-golden">
+                  <p className="text-sm text-adalah-golden">
                     Collateral: {app.collateral}
                   </p>
                   {app.riskScore && (
-                    <p className="text-sm text-golden">
+                    <p className="text-sm text-adalah-golden">
                       Risk Score:{" "}
-                      <span className="text-maroon font-bold">
+                      <span className="text-adalah-primary font-bold">
                         {app.riskScore}
                       </span>
                     </p>
@@ -163,21 +165,21 @@ const CapitalProviderDashboard = () => {
                   <div className="flex flex-wrap gap-2">
                     <Button
                       variant="outline"
-                      className="text-maroon border-maroon hover:bg-maroon/5"
+                      className="text-adalah-dark border-adalah-dark hover:bg-adalah-dark/5"
                       onClick={() => handleRiskAssessment(app)}
                     >
                       Assess Risk
                     </Button>
 
                     <Button
-                      className="bg-gradient-to-r from-maroon to-maroon-dark text-white hover:opacity-90"
+                      className="bg-gradient-to-r from-adalah-dark to-adalah-golden text-white hover:opacity-90"
                       onClick={() => handleApprove(app)}
                     >
                       Approve
                     </Button>
 
                     <Button
-                      className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold hover:opacity-90"
+                      className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold hover:opacity-90"
                       onClick={() => handleFund(app)}
                     >
                       Fund
@@ -185,7 +187,7 @@ const CapitalProviderDashboard = () => {
 
                     <Button
                       variant="outline"
-                      className="text-maroon border-maroon hover:bg-maroon/5"
+                      className="text-adalah-dark border-adalah-dark hover:bg-adalah-dark/5"
                       onClick={() =>
                         navigate(`/capital/applications/${app.id}`)
                       }
@@ -201,13 +203,13 @@ const CapitalProviderDashboard = () => {
 
         {/* Phase 3: Portfolio Management */}
         <div>
-          <h2 className="text-2xl font-bold text-maroon mb-4">
+          <h2 className="text-2xl font-bold text-adalah-dark mb-4">
             Portfolio Management
           </h2>
 
           {portfolio.length === 0 ? (
-            <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-maroon/10">
-              <p className="text-golden">No funded contracts yet.</p>
+            <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-adalah-dark/10">
+              <p className="text-adalah-golden">No funded contracts yet.</p>
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -218,20 +220,22 @@ const CapitalProviderDashboard = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-maroon/10">
-                    <p className="text-sm text-golden mb-1">
+                  <Card className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-adalah-dark/10">
+                    <p className="text-sm text-adalah-golden mb-1">
                       Contract #{loan.id}
                     </p>
-                    <p className="text-maroon font-semibold mb-1">
+                    <p className="text-adalah-dark font-semibold mb-1">
                       {loan.borrower}
                     </p>
-                    <p className="text-sm text-golden">
+                    <p className="text-sm text-adalah-golden">
                       Amount: ${loan.amount.toLocaleString()}
                     </p>
-                    <p className="text-sm text-golden">Status: {loan.status}</p>
+                    <p className="text-sm text-adalah-golden">
+                      Status: {loan.status}
+                    </p>
                     <Button
                       variant="outline"
-                      className="mt-2 text-maroon border-maroon hover:bg-maroon/5"
+                      className="mt-2 text-adalah-primary border-adalah-primary hover:bg-adalah-primary/5"
                       onClick={() => navigate(`/capital/portfolio/${loan.id}`)}
                     >
                       View Portfolio

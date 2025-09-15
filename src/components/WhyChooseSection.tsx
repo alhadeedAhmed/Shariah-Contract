@@ -16,7 +16,7 @@ const WhyChooseSection = () => {
     <section id="why-choose-us" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
-          className="mt-6 bg-gradient-to-r from-maroon to-maroon-light rounded-2xl p-8 text-white"
+          className="mt-6 bg-gradient-to-r from-adalah-golden to-adalah-dark rounded-2xl p-8 text-white"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -42,7 +42,7 @@ const WhyChooseSection = () => {
                   backgroundColor: "rgba(255, 255, 255, 0.15)",
                 }}
               >
-                <CheckCircle className="h-5 w-5 text-golden-light flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-white flex-shrink-0" />
                 <span className="text-sm font-medium">{benefit}</span>
               </motion.div>
             ))}
@@ -52,7 +52,7 @@ const WhyChooseSection = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 size="lg"
-                className="bg-golden hover:bg-golden-light text-maroon font-semibold px-8"
+                className="bg-gradient-to-r from-adalah-golden to-adalah-dark hover:from-adalah-golden/90 hover:to-adalah-dark/90 text-white font-semibold px-8"
               >
                 Start Creating Contracts Today
                 <ArrowRight className="ml-2 h-4 w-4" />

@@ -4,15 +4,15 @@ import { Card } from "@/components/ui/card";
 const stats = [
   { label: "Tokenized Contracts", value: "0", type: "Active" },
   { label: "Processing Status", value: "2", type: "Pending" },
-  { label: "Vault Accounts", value: "5", type: "Connected" }
+  { label: "Vault Accounts", value: "5", type: "Connected" },
 ];
 
 const TokenizationEngine = () => {
   return (
-    <Card className="border border-golden/20">
+    <Card className="border border-adalah-golden/20">
       <div className="p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-maroon">
+          <h2 className="text-lg font-semibold text-adalah-primary font-inter-tight">
             Adalah Tokenization Engine Console
           </h2>
           <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -26,12 +26,18 @@ const TokenizationEngine = () => {
             {stats.map((stat, index) => (
               <div key={index} className="space-y-1">
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-gray-900">{stat.value}</span>
-                  <span className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${
-                    stat.type === 'Active' ? 'bg-red-100 text-red-800' :
-                    stat.type === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-blue-100 text-blue-800'
-                  }`}>
+                  <span className="text-sm font-medium text-gray-900">
+                    {stat.value}
+                  </span>
+                  <span
+                    className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${
+                      stat.type === "Active"
+                        ? "bg-adalah-golden/20 text-adalah-primary"
+                        : stat.type === "Pending"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : "bg-blue-100 text-blue-800"
+                    }`}
+                  >
                     {stat.type}
                   </span>
                 </div>
@@ -49,4 +55,4 @@ const TokenizationEngine = () => {
   );
 };
 
-export default TokenizationEngine; 
+export default TokenizationEngine;

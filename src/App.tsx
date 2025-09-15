@@ -48,6 +48,7 @@ import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminComplianceHub from "./pages/AdminComplianceHub";
 import AdminManageAccess from "./pages/AdminManageAccess";
 import IndividualSignup from "./pages/IndividualSignup";
+import TEEDashboard from "./components/dashboard/TEEDashboard";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +68,14 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/tee-dashboard"
+                element={
+                  <ProtectedRoute>
+                    <TEEDashboard />
                   </ProtectedRoute>
                 }
               />

@@ -51,14 +51,16 @@ const Header = () => {
         {/* Rounded pill navbar */}
         <div
           ref={menuRef}
-          className="flex items-center justify-between bg-maroon text-golden px-6 py-3 rounded-full shadow-lg border border-golden/20 relative"
+          className="flex items-center justify-between bg-adalah-primary text-white px-6 py-3 rounded-full shadow-lg border border-adalah-golden/20 relative"
         >
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-golden to-golden-light rounded-full flex items-center justify-center shadow-md">
-              <Shield className="text-maroon h-4 w-4" />
+            <div className="w-8 h-8 bg-gradient-to-br from-adalah-golden to-adalah-dark rounded-full flex items-center justify-center shadow-md">
+              <Shield className="text-white h-4 w-4" />
             </div>
-            <span className="text-sm font-bold">Islamic FinTech</span>
+            <span className="text-sm font-bold font-inter-tight">
+              Adalah Chain
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -67,7 +69,7 @@ const Header = () => {
               <a
                 key={i}
                 href={item.href}
-                className="hover:text-white transition-colors text-sm font-medium"
+                className="hover:text-white transition-colors text-sm font-medium font-inter"
               >
                 {item.label}
               </a>
@@ -77,7 +79,7 @@ const Header = () => {
           {/* Sign In (Desktop) */}
           <div className="hidden md:flex">
             <Link to="/signin">
-              <Button className="bg-golden hover:bg-golden-light text-maroon font-semibold px-5 py-2 rounded-full shadow-md">
+              <Button className="bg-gradient-to-r from-adalah-golden to-adalah-dark hover:from-adalah-golden/90 hover:to-adalah-dark/90 text-white font-semibold font-inter px-5 py-2 rounded-full shadow-md">
                 Sign In
               </Button>
             </Link>
@@ -87,7 +89,7 @@ const Header = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-golden"
+              className="text-white"
             >
               {menuOpen ? (
                 <X className="h-6 w-6" />
@@ -105,20 +107,20 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-0 mt-2 w-full bg-maroon/95 border border-golden/20 rounded-2xl shadow-lg flex flex-col space-y-3 p-4 md:hidden"
+                className="absolute top-full left-0 mt-2 w-full bg-adalah-primary/95 border border-adalah-golden/20 rounded-2xl shadow-lg flex flex-col space-y-3 p-4 md:hidden"
               >
                 {navItems.map((item, i) => (
                   <a
                     key={i}
                     href={item.href}
-                    className="block text-golden/90 hover:text-white hover:bg-golden/20 rounded-md px-3 py-2 transition-all text-sm font-medium"
+                    className="block text-white/90 hover:text-white hover:bg-adalah-golden/20 rounded-md px-3 py-2 transition-all text-sm font-medium"
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.label}
                   </a>
                 ))}
                 <Link to="/signin" onClick={() => setMenuOpen(false)}>
-                  <Button className="w-full bg-golden hover:bg-golden-light text-maroon font-semibold rounded-full shadow-md">
+                  <Button className="w-full bg-gradient-to-r from-adalah-golden to-adalah-dark hover:from-adalah-golden/90 hover:to-adalah-dark/90 text-white font-semibold rounded-full shadow-md">
                     Sign In
                   </Button>
                 </Link>

@@ -30,7 +30,7 @@ const ApplicationStatus = () => {
   const { updateApplication } = useAppStore();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-maroon/5 via-background to-golden/10">
+    <div className="min-h-screen bg-gradient-to-br from-adalah-primary/5 via-background to-adalah-golden/10">
       <DashboardHeader />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
@@ -52,18 +52,18 @@ const ApplicationStatus = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
-          <Card className="p-6 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-maroon/20">
-            <h2 className="text-lg font-bold text-maroon mb-3">
+          <Card className="p-6 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-adalah-primary/20">
+            <h2 className="text-lg font-bold text-adalah-primary mb-3 font-inter-tight">
               Notifications
             </h2>
-            <p className="text-maroon/80 text-sm leading-relaxed">
+            <p className="text-adalah-primary/80 text-sm leading-relaxed">
               Notifications and timestamps will appear here. This is a mock UI
               showing real-time updates once integrated.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Button
-                className="bg-gradient-to-r from-maroon to-maroon-dark text-white shadow-md hover:shadow-lg"
+                className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white shadow-md hover:shadow-lg"
                 onClick={() =>
                   id &&
                   updateApplication(id, {
@@ -75,7 +75,7 @@ const ApplicationStatus = () => {
               </Button>
               <Button
                 variant="outline"
-                className="text-maroon border-maroon hover:bg-maroon/5"
+                className="text-adalah-primary border-adalah-primary hover:bg-adalah-primary/5"
                 onClick={() =>
                   id &&
                   updateApplication(id, {
@@ -117,14 +117,14 @@ const ApplicationStatus = () => {
           className="flex flex-wrap gap-4"
         >
           <Link to={`/delivery/${id ?? "unknown"}`}>
-            <Button className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold shadow-md hover:shadow-lg">
+            <Button className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold shadow-md hover:shadow-lg">
               Go to Delivery
             </Button>
           </Link>
           <Link to={`/payments`}>
             <Button
               variant="outline"
-              className="text-maroon border-maroon hover:bg-maroon/5"
+              className="text-adalah-primary border-adalah-primary hover:bg-adalah-primary/5"
             >
               Go to Payments
             </Button>

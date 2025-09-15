@@ -108,24 +108,26 @@ const SignIn = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Brand & Content */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-red-900 via-red-950 to-red-800 relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-adalah-primary relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-golden rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-20 w-96 h-96 bg-adalah-golden rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-80 h-80 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-golden-light rounded-full blur-2xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-adalah-golden rounded-full blur-2xl"></div>
         </div>
 
         <div className="relative z-10 flex flex-col justify-center px-12 py-8 text-white">
           {/* Logo & Brand */}
           <div className="mb-4">
             <div className="flex items-center space-x-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-golden to-golden-light rounded-2xl flex items-center justify-center shadow-2xl">
-                <Shield className="text-red-900 h-8 w-8" />
+              <div className="w-16 h-16 bg-gradient-to-br from-adalah-golden to-adalah-dark rounded-2xl flex items-center justify-center shadow-2xl">
+                <Shield className="text-white h-8 w-8" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold">Islamic FinTech</h1>
-                <p className="text-golden-light text-lg">
+                <h1 className="text-3xl font-bold font-inter-tight">
+                  Adalah Chain
+                </h1>
+                <p className="text-adalah-golden text-lg">
                   Shariah-Compliant Smart Contracts
                 </p>
               </div>
@@ -147,7 +149,7 @@ const SignIn = () => {
                   style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                 >
                   <div className="flex-shrink-0 w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                    <IconComponent className="w-6 h-6 text-golden" />
+                    <IconComponent className="w-6 h-6 text-adalah-golden" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-1">
@@ -170,7 +172,7 @@ const SignIn = () => {
                 className="text-center transform transition-transform hover:scale-105"
                 style={{ animationDelay: `${0.5 + index * 0.1}s` }}
               >
-                <div className="text-2xl font-bold text-golden mb-1">
+                <div className="text-2xl font-bold text-adalah-golden mb-1">
                   {stat.value}
                 </div>
                 <div className="text-white/70 text-sm">{stat.label}</div>
@@ -181,11 +183,11 @@ const SignIn = () => {
       </div>
 
       {/* Right Side - Sign In Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-yellow-50 p-8 relative overflow-hidden">
+      <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-adalah-golden/50 p-8 relative overflow-hidden">
         {/* Background Glow Effects */}
-        <div className="absolute top-20 right-20 w-72 h-72 bg-yellow-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-20 right-20 w-72 h-72 bg-adalah-golden/10 rounded-full blur-3xl animate-pulse"></div>
         <div
-          className="absolute bottom-20 left-20 w-64 h-64 bg-red-900/5 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-20 left-20 w-64 h-64 bg-adalah-primary/5 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         ></div>
 
@@ -193,11 +195,11 @@ const SignIn = () => {
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8">
             <div className="inline-flex items-center space-x-3 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-golden to-golden-light rounded-xl flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110 group-hover:rotate-3">
-                <Shield className="text-red-900 h-6 w-6" />
+              <div className="w-12 h-12 bg-gradient-to-br from-adalah-golden to-adalah-dark rounded-xl flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110 group-hover:rotate-3">
+                <Shield className="text-adalah-primary h-6 w-6" />
               </div>
-              <span className="text-2xl font-bold text-red-900 group-hover:text-red-700 transition-colors">
-                Islamic FinTech
+              <span className="text-2xl font-bold text-adalah-primary group-hover:text-adalah-primary/80 transition-colors font-inter-tight">
+                Adalah Chain
               </span>
             </div>
           </div>
@@ -205,10 +207,10 @@ const SignIn = () => {
           {/* Sign In Card */}
           <div className="transform transition-transform">
             <Card className="bg-white/80 backdrop-blur-xl border-0 shadow-2xl rounded-3xl overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-900 via-yellow-400 to-red-800"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-adalah-golden via-adalah-golden to-adalah-dark"></div>
 
               <CardHeader className="text-center space-y-3 pt-8 pb-6">
-                <CardTitle className="text-3xl font-bold text-red-900">
+                <CardTitle className="text-3xl font-bold text-adalah-primary font-inter-tight">
                   Welcome Back
                 </CardTitle>
                 <CardDescription className="text-gray-600 text-lg">
@@ -232,7 +234,7 @@ const SignIn = () => {
                       placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="h-12 border-2 border-gray-200 focus:border-yellow-400 focus:ring-yellow-400/20 rounded-xl text-base bg-white/50 backdrop-blur-sm transition-all duration-200"
+                      className="h-12 border-2 border-gray-200 focus:border-0 rounded-xl text-base bg-white/50 backdrop-blur-sm transition-all duration-200"
                     />
                   </div>
 
@@ -251,7 +253,7 @@ const SignIn = () => {
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="h-12 border-2 border-gray-200 focus:border-yellow-400 focus:ring-yellow-400/20 rounded-xl text-base bg-white/50 backdrop-blur-sm pr-12 transition-all duration-200"
+                        className="h-12 border-2 border-gray-200 focus:border-0 rounded-xl text-base bg-white/50 backdrop-blur-sm pr-12 transition-all duration-200"
                       />
                       <button
                         type="button"
@@ -273,7 +275,7 @@ const SignIn = () => {
                       Select Your Role
                     </Label>
                     <Select value={role} onValueChange={setRole}>
-                      <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-yellow-400 bg-white/50 backdrop-blur-sm rounded-xl text-base">
+                      <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-0 bg-white/50 backdrop-blur-sm rounded-xl text-base">
                         <SelectValue placeholder="Choose your role" />
                       </SelectTrigger>
                       <SelectContent className="rounded-xl border-0 shadow-2xl">
@@ -315,7 +317,7 @@ const SignIn = () => {
                   <div className="transform transition-transform hover:scale-105 active:scale-95">
                     <Button
                       onClick={handleSubmit}
-                      className="w-full bg-maroon-dark text-white font-semibold h-14 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-base"
+                      className="w-full bg-gradient-to-r from-adalah-dark to-adalah-golden text-white font-semibold h-14 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-base"
                       disabled={isLoading}
                     >
                       {isLoading ? (
@@ -346,7 +348,7 @@ const SignIn = () => {
                     <Button
                       onClick={handleDemoSignIn}
                       variant="outline"
-                      className="w-full border-2 border-golden text-golden-dark hover:bg-golden hover:text-white font-semibold h-14 rounded-xl transition-all duration-200 text-base bg-white/50 backdrop-blur-sm"
+                      className="w-full border-2 border-adalah-golden text-adalah-primary hover:bg-gradient-to-r hover:from-adalah-golden hover:to-adalah-dark hover:text-white hover:border-0 font-semibold h-14 rounded-xl transition-all duration-200 text-base bg-white/50 backdrop-blur-sm"
                       disabled={isLoading}
                     >
                       <Sparkles className="w-5 h-5 mr-2" />
@@ -360,7 +362,7 @@ const SignIn = () => {
                   <p className="text-gray-600">
                     Don't have an account?{" "}
                     <Link to="/signup">
-                      <button className="text-yellow-600 hover:text-golden font-semibold transition-colors">
+                      <button className="text-adalah-golden hover:text-adalah-golden font-semibold transition-colors">
                         Sign Up
                       </button>
                     </Link>

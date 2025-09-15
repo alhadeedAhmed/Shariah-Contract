@@ -49,10 +49,10 @@ const ScholarSignup = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left Hero Section */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-maroon via-maroon-dark to-maroon relative overflow-hidden text-white">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-adalah-primary via-adalah-dark to-adalah-primary relative overflow-hidden text-white">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-golden rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-80 h-80 bg-maroon-light rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-20 w-96 h-96 bg-adalah-golden rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-adalah-golden/60 rounded-full blur-3xl"></div>
         </div>
 
         <div className="relative z-10 flex flex-col justify-center px-12 py-10">
@@ -63,12 +63,14 @@ const ScholarSignup = () => {
           >
             {/* Header */}
             <div className="flex items-center space-x-4 mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-golden to-golden-light rounded-2xl flex items-center justify-center shadow-2xl">
-                <BookOpen className="text-maroon h-8 w-8" />
+              <div className="w-16 h-16 bg-gradient-to-br from-adalah-golden to-adalah-golden/80 rounded-2xl flex items-center justify-center shadow-2xl">
+                <BookOpen className="text-white h-8 w-8" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold">Scholar Onboarding</h1>
-                <p className="text-golden-light text-lg">
+                <h1 className="text-3xl font-bold font-inter-tight">
+                  Scholar Onboarding
+                </h1>
+                <p className="text-adalah-golden/90 text-lg">
                   Faith. Knowledge. Compliance.
                 </p>
               </div>
@@ -84,24 +86,24 @@ const ScholarSignup = () => {
             {/* Features */}
             <div className="grid grid-cols-3 gap-6">
               <div className="flex flex-col items-center text-center space-y-2">
-                <div className="w-12 h-12 rounded-xl bg-golden/20 flex items-center justify-center">
-                  <Shield className="h-6 w-6 text-golden" />
+                <div className="w-12 h-12 rounded-xl bg-adalah-golden/20 flex items-center justify-center">
+                  <Shield className="h-6 w-6 text-adalah-golden" />
                 </div>
                 <p className="text-sm text-white/90 font-medium">
                   Trusted Identity
                 </p>
               </div>
               <div className="flex flex-col items-center text-center space-y-2">
-                <div className="w-12 h-12 rounded-xl bg-golden/20 flex items-center justify-center">
-                  <BookOpen className="h-6 w-6 text-golden" />
+                <div className="w-12 h-12 rounded-xl bg-adalah-golden/20 flex items-center justify-center">
+                  <BookOpen className="h-6 w-6 text-adalah-golden" />
                 </div>
                 <p className="text-sm text-white/90 font-medium">
                   Knowledge Verified
                 </p>
               </div>
               <div className="flex flex-col items-center text-center space-y-2">
-                <div className="w-12 h-12 rounded-xl bg-golden/20 flex items-center justify-center">
-                  <CheckCircle className="h-6 w-6 text-golden" />
+                <div className="w-12 h-12 rounded-xl bg-adalah-golden/20 flex items-center justify-center">
+                  <CheckCircle className="h-6 w-6 text-adalah-golden" />
                 </div>
                 <p className="text-sm text-white/90 font-medium">
                   Compliance Driven
@@ -113,36 +115,36 @@ const ScholarSignup = () => {
       </div>
 
       {/* Right Form Section */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-golden/10 p-8 relative overflow-hidden">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-golden/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-adalah-golden/10 p-8 relative overflow-hidden">
+        <div className="absolute top-20 right-20 w-72 h-72 bg-adalah-golden/20 rounded-full blur-3xl animate-pulse"></div>
         <div
-          className="absolute bottom-20 left-20 w-64 h-64 bg-maroon/10 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-20 left-20 w-64 h-64 bg-adalah-primary/10 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         ></div>
 
         <div className="w-full max-w-2xl relative z-10">
           <Card className="bg-white/90 backdrop-blur-xl border-0 shadow-2xl rounded-3xl overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-maroon via-golden to-maroon-dark"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-adalah-primary via-adalah-golden to-adalah-dark"></div>
 
             <div className="p-6">
-              <h1 className="text-2xl font-bold text-maroon mb-2">
+              <h1 className="text-2xl font-bold text-adalah-primary mb-2 font-inter-tight">
                 Scholar Signup
               </h1>
-              <p className="text-sm text-golden mb-6">
+              <p className="text-sm text-adalah-golden mb-6">
                 Step {step + 1} of {steps.length}: {steps[step]}
               </p>
 
               {/* Step Content */}
               {step === 0 && (
                 <div className="space-y-4">
-                  <Label className="block text-maroon">Full Name</Label>
+                  <Label className="block text-adalah-primary">Full Name</Label>
                   <Input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Full Name"
                   />
 
-                  <Label className="block text-maroon">
+                  <Label className="block text-adalah-primary">
                     Islamic Finance Qualification
                   </Label>
                   <Input
@@ -151,7 +153,7 @@ const ScholarSignup = () => {
                     placeholder="e.g., AAOIFI Certified"
                   />
 
-                  <Label className="block text-maroon">
+                  <Label className="block text-adalah-primary">
                     Upload Credentials
                   </Label>
                   <Input
@@ -159,7 +161,7 @@ const ScholarSignup = () => {
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                   />
 
-                  <Label className="block text-maroon">
+                  <Label className="block text-adalah-primary">
                     Upload Education Certificates
                   </Label>
                   <Input type="file" />
@@ -168,17 +170,17 @@ const ScholarSignup = () => {
 
               {step === 1 && (
                 <div className="space-y-4">
-                  <p className="text-maroon font-medium">
+                  <p className="text-adalah-primary font-medium font-inter-tight">
                     Background Verification
                   </p>
-                  <p className="text-sm text-golden">
+                  <p className="text-sm text-adalah-golden">
                     Complete your background verification. (Mock toggle below)
                   </p>
                   <Button
                     className={`${
                       backgroundVerified
                         ? "bg-green-600 hover:bg-green-700"
-                        : "bg-gradient-to-r from-maroon to-maroon-dark"
+                        : "bg-gradient-to-r from-adalah-golden to-adalah-dark"
                     } text-white`}
                     onClick={() => setBackgroundVerified(true)}
                   >
@@ -191,7 +193,7 @@ const ScholarSignup = () => {
 
               {step === 2 && (
                 <div className="space-y-4">
-                  <p className="text-maroon font-medium">
+                  <p className="text-adalah-primary font-medium font-inter-tight">
                     Platform Training Modules
                   </p>
                   <div className="space-y-2">
@@ -202,7 +204,7 @@ const ScholarSignup = () => {
                     ].map((m) => (
                       <label
                         key={m}
-                        className="flex items-center space-x-2 text-sm text-maroon"
+                        className="flex items-center space-x-2 text-sm text-adalah-primary"
                       >
                         <input
                           type="checkbox"
@@ -218,7 +220,7 @@ const ScholarSignup = () => {
 
               {step === 3 && (
                 <div className="space-y-4">
-                  <p className="text-maroon font-medium">
+                  <p className="text-adalah-primary font-medium font-inter-tight">
                     Set Availability Schedule
                   </p>
                   <Input
@@ -233,7 +235,7 @@ const ScholarSignup = () => {
               <div className="mt-6 flex justify-between">
                 <Button
                   variant="outline"
-                  className="text-maroon border-maroon hover:bg-maroon/5"
+                  className="text-adalah-primary border-adalah-primary hover:bg-adalah-primary/5"
                   disabled={step === 0}
                   onClick={back}
                 >
@@ -241,14 +243,14 @@ const ScholarSignup = () => {
                 </Button>
                 {step < steps.length - 1 ? (
                   <Button
-                    className="bg-gradient-to-r from-maroon to-maroon-dark text-white"
+                    className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white"
                     onClick={next}
                   >
                     Next
                   </Button>
                 ) : (
                   <Button
-                    className="bg-gradient-to-r from-golden to-golden-dark text-maroon font-semibold"
+                    className="bg-gradient-to-r from-adalah-golden to-adalah-dark text-white font-semibold"
                     onClick={handleSubmit}
                   >
                     Finish

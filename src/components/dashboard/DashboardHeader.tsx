@@ -17,6 +17,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const allNav = {
   common: [
+    { label: "TEE Dashboard", path: "/tee-dashboard" },
     { label: "AI Contracts", path: "/ai-contracts" },
     { label: "Enhanced Workflow", path: "/enhanced-workflow" },
     { label: "Create Contract", path: "/create-contract" },
@@ -76,15 +77,15 @@ const DashboardHeader = () => {
   ];
 
   return (
-    <header className="bg-white/90 backdrop-blur-md border-b border-maroon/10 sticky top-0 z-50">
+    <header className="bg-white/90 backdrop-blur-md border-b border-adalah-primary/10 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-9 h-9 bg-maroon rounded-full flex items-center justify-center shadow-lg">
+            <div className="w-9 h-9 bg-adalah-primary rounded-full flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-lg">A</span>
             </div>
-            <span className="text-base md:text-lg font-bold text-maroon whitespace-nowrap">
+            <span className="text-base md:text-lg font-bold text-adalah-primary whitespace-nowrap font-inter-tight">
               Shariah Contract Intelligence
             </span>
           </Link>
@@ -99,8 +100,8 @@ const DashboardHeader = () => {
                   to={item.path}
                   className={`px-3 py-2 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
                     isActive
-                      ? "border-maroon text-maroon"
-                      : "border-transparent text-gray-600 hover:text-maroon hover:border-maroon/50"
+                      ? "border-adalah-primary text-adalah-primary"
+                      : "border-transparent text-gray-600 hover:text-adalah-primary hover:border-adalah-primary/50"
                   }`}
                 >
                   {item.label}
@@ -115,7 +116,7 @@ const DashboardHeader = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-gray-600 hover:text-maroon"
+                className="text-gray-600 hover:text-adalah-primary"
               >
                 <Bell className="h-5 w-5" />
               </Button>
@@ -134,7 +135,7 @@ const DashboardHeader = () => {
                       alt="User Avatar"
                       className="object-cover"
                     />
-                    <AvatarFallback className="bg-golden/20 text-maroon">
+                    <AvatarFallback className="bg-adalah-golden/20 text-adalah-primary">
                       U
                     </AvatarFallback>
                   </Avatar>
@@ -143,7 +144,7 @@ const DashboardHeader = () => {
               <DropdownMenuContent className="w-56" align="end">
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none text-maroon">
+                    <p className="text-sm font-medium leading-none text-adalah-primary">
                       User Name
                     </p>
                     <p className="text-xs leading-none text-gray-500">
@@ -172,7 +173,7 @@ const DashboardHeader = () => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
-                  className="text-red-600 focus:text-red-600 cursor-pointer"
+                  className="text-adalah-primary focus:text-adalah-primary cursor-pointer"
                   onClick={handleLogout}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
@@ -183,7 +184,7 @@ const DashboardHeader = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden text-maroon"
+              className="lg:hidden text-adalah-primary"
               onClick={() => setMobileOpen((prev) => !prev)}
             >
               {mobileOpen ? (
@@ -204,7 +205,7 @@ const DashboardHeader = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white/95 backdrop-blur-md border-t border-maroon/10 px-4 py-3 space-y-2"
+            className="lg:hidden bg-white/95 backdrop-blur-md border-t border-adalah-primary/10 px-4 py-3 space-y-2"
           >
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
@@ -215,8 +216,8 @@ const DashboardHeader = () => {
                   onClick={() => setMobileOpen(false)}
                   className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-maroon text-white"
-                      : "text-gray-700 hover:bg-golden/20 hover:text-maroon"
+                      ? "bg-adalah-primary text-white"
+                      : "text-gray-700 hover:bg-adalah-golden/20 hover:text-adalah-primary"
                   }`}
                 >
                   {item.label}
