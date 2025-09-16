@@ -63,7 +63,7 @@ const ServiceProviderSignup = () => {
             </div>
 
             <p className="text-lg text-white/90 leading-relaxed mb-6">
-              Become a trusted dealer or supplier in the Islamic finance
+              Become a trusted dealer or supplier in the Islamic Economy
               ecosystem. Get your Shariah-compliant digital passport and
               integrate seamlessly with SATpay.
             </p>

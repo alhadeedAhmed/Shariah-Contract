@@ -134,7 +134,7 @@ const SignIn = () => {
             </div>
             <p className="text-xl text-white/90 leading-relaxed">
               Secure, transparent, and powered by AI-driven Shariah validation
-              for the modern Islamic finance ecosystem.
+              for the modern Islamic Economy ecosystem.
             </p>
           </div>
 

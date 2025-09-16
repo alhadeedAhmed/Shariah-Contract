@@ -54,7 +54,7 @@ const ContractsSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-extrabold text-adalah-primary mb-6 font-inter-tight">
-            Islamic Finance Contract Types
+            Islamic Economy Contract Types
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Comprehensive range of Shariah-compliant financial instruments

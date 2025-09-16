@@ -34,7 +34,7 @@ const VoiceAI = () => {
       id: "1",
       type: "ai",
       content:
-        "Hello! I'm your AI assistant. I can help you navigate the platform, generate contracts, check compliance, and answer questions about Islamic finance. How can I assist you today?",
+        "Hello! I'm your AI assistant. I can help you navigate the platform, generate contracts, check compliance, and answer questions about Islamic Economy. How can I assist you today?",
       timestamp: new Date().toLocaleTimeString(),
     },
   ]);
@@ -96,7 +96,7 @@ const VoiceAI = () => {
     }
 
     if (lowerInput.includes("help") || lowerInput.includes("navigate")) {
-      return "I can help you navigate the platform! Here are some things I can assist with:\n• Generate Shariah-compliant contracts\n• Check compliance and risk assessment\n• Calculate payments and installments\n• Navigate to different sections\n• Answer questions about Islamic finance\n\nWhat would you like to do?";
+      return "I can help you navigate the platform! Here are some things I can assist with:\n• Generate Shariah-compliant contracts\n• Check compliance and risk assessment\n• Calculate payments and installments\n• Navigate to different sections\n• Answer questions about Islamic Economy\n\nWhat would you like to do?";
     }
 
     return (

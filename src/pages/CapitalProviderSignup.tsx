@@ -293,7 +293,7 @@ const CapitalProviderSignup = () => {
                   </p>
                   <p className="text-adalah-golden">
                     Your institution is now verified and ready to participate in
-                    Islamic finance transactions on the platform.
+                    Islamic economy transactions on the platform.
                   </p>
                 </motion.div>
               )}

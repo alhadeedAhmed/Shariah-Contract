@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { FileText, Users, DollarSign, TrendingUp, ArrowRight, ChevronRight } from "lucide-react";
+import {
+  FileText,
+  Users,
+  DollarSign,
+  TrendingUp,
+  ArrowRight,
+  ChevronRight,
+} from "lucide-react";
 
 const stats = [
   {
@@ -12,7 +19,8 @@ const stats = [
     color: "from-[#4A0404] to-[#4A0404]/80",
     trend: "+12%",
     trendUp: true,
-    pattern: "radial-gradient(circle at 100% 100%, rgba(180,146,95,0.1) 0%, transparent 50%)"
+    pattern:
+      "radial-gradient(circle at 100% 100%, rgba(180,146,95,0.1) 0%, transparent 50%)",
   },
   {
     title: "Pending Validation",
@@ -22,7 +30,8 @@ const stats = [
     color: "from-[#B4925F] to-[#B4925F]/80",
     trend: "-3%",
     trendUp: false,
-    pattern: "radial-gradient(circle at 0% 0%, rgba(74,4,4,0.1) 0%, transparent 50%)"
+    pattern:
+      "radial-gradient(circle at 0% 0%, rgba(74,4,4,0.1) 0%, transparent 50%)",
   },
   {
     title: "Scholar Votes",
@@ -32,7 +41,8 @@ const stats = [
     color: "from-[#4A0404] to-[#4A0404]/80",
     trend: "+8%",
     trendUp: true,
-    pattern: "radial-gradient(circle at 100% 0%, rgba(180,146,95,0.1) 0%, transparent 50%)"
+    pattern:
+      "radial-gradient(circle at 100% 0%, rgba(180,146,95,0.1) 0%, transparent 50%)",
   },
   {
     title: "Total Value",
@@ -42,8 +52,9 @@ const stats = [
     color: "from-[#B4925F] to-[#B4925F]/80",
     trend: "+15%",
     trendUp: true,
-    pattern: "radial-gradient(circle at 0% 100%, rgba(74,4,4,0.1) 0%, transparent 50%)"
-  }
+    pattern:
+      "radial-gradient(circle at 0% 100%, rgba(74,4,4,0.1) 0%, transparent 50%)",
+  },
 ];
 
 const cardVariants = {
@@ -51,8 +62,8 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 }
-  }
+    transition: { duration: 0.5 },
+  },
 };
 
 const containerVariants = {
@@ -60,9 +71,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const DashboardOverview = () => {
@@ -70,7 +81,7 @@ const DashboardOverview = () => {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <motion.div 
+          <motion.div
             className="relative"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -78,7 +89,7 @@ const DashboardOverview = () => {
           >
             <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-12 bg-gradient-to-b from-[#4A0404] to-[#B4925F] rounded-full" />
             <h1 className="text-3xl font-bold text-[#4A0404] tracking-tight">
-              Welcome to Your Islamic Finance Dashboard
+              Welcome to Your Islamic Economy Dashboard
             </h1>
             <p className="text-[#B4925F] mt-2 text-lg">
               Monitor and manage your Shariah-compliant contracts
@@ -91,16 +102,14 @@ const DashboardOverview = () => {
           transition={{ duration: 0.5 }}
           className="flex items-center space-x-4"
         >
-          <Button 
+          <Button
             variant="outline"
             className="border-2 border-[#4A0404] text-[#4A0404] hover:bg-[#4A0404]/5 px-6 h-12 rounded-xl"
           >
             View Analytics
             <ChevronRight className="h-4 w-4 ml-2" />
           </Button>
-          <Button 
-            className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 hover:from-[#4A0404]/90 hover:to-[#4A0404] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 h-12 rounded-xl relative overflow-hidden group"
-          >
+          <Button className="bg-gradient-to-r from-[#4A0404] to-[#4A0404]/90 hover:from-[#4A0404]/90 hover:to-[#4A0404] text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 h-12 rounded-xl relative overflow-hidden group">
             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#B4925F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative flex items-center">
               Create New Contract
@@ -110,7 +119,7 @@ const DashboardOverview = () => {
         </motion.div>
       </div>
 
-      <motion.div 
+      <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         variants={containerVariants}
         initial="hidden"
@@ -124,18 +133,28 @@ const DashboardOverview = () => {
             className="transform transition-all duration-300"
           >
             <Card className="relative p-6 border border-[#4A0404]/10 bg-white/70 backdrop-blur-sm hover:shadow-2xl overflow-hidden group">
-              <div 
+              <div
                 className="absolute inset-0 opacity-30"
                 style={{ background: stat.pattern }}
               />
               <div className="relative">
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`p-3 rounded-xl bg-gradient-to-r ${stat.color} shadow-lg group-hover:shadow-2xl transition-shadow duration-300`}>
+                  <div
+                    className={`p-3 rounded-xl bg-gradient-to-r ${stat.color} shadow-lg group-hover:shadow-2xl transition-shadow duration-300`}
+                  >
                     <stat.icon className="h-6 w-6 text-white" />
                   </div>
-                  <span className={`text-sm font-medium ${stat.trendUp ? 'text-green-600' : 'text-red-600'} flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm shadow-sm`}>
+                  <span
+                    className={`text-sm font-medium ${
+                      stat.trendUp ? "text-green-600" : "text-red-600"
+                    } flex items-center px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm shadow-sm`}
+                  >
                     {stat.trend}
-                    <TrendingUp className={`h-4 w-4 ml-1 ${stat.trendUp ? '' : 'rotate-180'}`} />
+                    <TrendingUp
+                      className={`h-4 w-4 ml-1 ${
+                        stat.trendUp ? "" : "rotate-180"
+                      }`}
+                    />
                   </span>
                 </div>
                 <p className="text-4xl font-bold text-[#4A0404] tracking-tight mb-2 group-hover:scale-105 transition-transform origin-left">
@@ -166,10 +185,11 @@ const DashboardOverview = () => {
           </div>
           <div>
             <h2 className="text-xl font-semibold tracking-tight group-hover:translate-x-1 transition-transform">
-              General Islamic Finance Contracts
+              General Islamic Economy Contracts
             </h2>
             <p className="text-[#B4925F] mt-1 group-hover:translate-x-1 transition-transform">
-              Access and manage your Shariah-compliant financial contracts with enhanced validation and compliance checks.
+              Access and manage your Shariah-compliant financial contracts with
+              enhanced validation and compliance checks.
             </p>
           </div>
         </div>

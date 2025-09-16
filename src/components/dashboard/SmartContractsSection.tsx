@@ -16,7 +16,7 @@ const recommendations = [
     avatar: "TB",
   },
   {
-    title: "Sukook-Islamic Finance",
+    title: "Sukook-Islamic Economy",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     status: "Active",
     avatar: "SF",

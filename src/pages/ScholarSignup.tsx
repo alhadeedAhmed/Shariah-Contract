@@ -79,7 +79,7 @@ const ScholarSignup = () => {
             {/* Description */}
             <p className="text-lg text-white/80 max-w-lg leading-relaxed mb-12">
               Join as a Shariah scholar to review contracts, issue Proof of
-              Faith (POF), and ensure compliance with Islamic finance
+              Faith (POF), and ensure compliance with Islamic Economy
               principles.
             </p>
 
@@ -145,7 +145,7 @@ const ScholarSignup = () => {
                   />
 
                   <Label className="block text-adalah-primary">
-                    Islamic Finance Qualification
+                    Islamic Economy Qualification
                   </Label>
                   <Input
                     value={certificate}

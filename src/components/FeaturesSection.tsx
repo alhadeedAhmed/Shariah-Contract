@@ -77,7 +77,7 @@ const FeaturesSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-extrabold text-adalah-primary mb-6 font-inter-tight">
-            Comprehensive Islamic Finance Platform
+            Comprehensive Islamic Economy Platform
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             From individual Murabahah contracts to complex business Musharakah

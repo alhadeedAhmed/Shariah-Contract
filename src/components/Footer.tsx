@@ -18,7 +18,7 @@ const footerSections = [
   {
     title: "Compliance & Governance",
     links: [
-      "Islamic Finance Guidelines",
+      "Islamic Economy Guidelines",
       "Scholar Network",
       "Proof of Faith Certificates",
       "Audit & Compliance Reports",
@@ -30,7 +30,7 @@ const footerSections = [
     links: [
       "Developer Documentation",
       "API Integration Guide",
-      "Islamic Finance Education",
+      "Islamic Economy Education",
       "Community Forum",
       "24/7 Technical Support",
     ],
@@ -79,7 +79,7 @@ const Footer = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              Revolutionizing Islamic finance through AI-powered contract
+              Revolutionizing Islamic Economy through AI-powered contract
               validation, blockchain security, and comprehensive Shariah
               compliance. Join thousands of users creating transparent, trusted
               financial agreements.
@@ -127,7 +127,7 @@ const Footer = () => {
                 </Button>
               </div>
               <p className="text-xs text-white/60">
-                Get updates on new Islamic finance products and features
+                Get updates on new Islamic Economy products and features
               </p>
             </motion.div>
           </div>

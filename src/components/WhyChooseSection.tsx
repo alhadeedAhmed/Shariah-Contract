@@ -27,7 +27,7 @@ const WhyChooseSection = () => {
               Why Choose Our Islamic Contract Platform?
             </h3>
             <p className="text-white/90 max-w-2xl mx-auto">
-              Experience the future of Islamic finance with our comprehensive,
+              Experience the future of Islamic Economy with our comprehensive,
               AI-powered platform designed for complete Shariah compliance.
             </p>
           </div>

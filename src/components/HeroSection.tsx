@@ -36,12 +36,14 @@ const HeroSection = () => {
 
             {/* Heading */}
             <motion.h1
-              className="text-4xl md:text-6xl font-extrabold text-adalah-primary leading-tight font-inter-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-adalah-primary leading-tight font-inter-tight"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Transform Islamic Finance with
+              <span className="block">Transform Islamic</span>
+              <span className="block">Social and Commercial</span>
+              <span className="block">Activities with</span>
               <span className="bg-gradient-to-r from-adalah-golden to-adalah-dark bg-clip-text text-transparent block mt-2">
                 Smart Contracts
               </span>
@@ -56,7 +58,7 @@ const HeroSection = () => {
             >
               Automate Murabahah, Musharakah, and Islamic contracts with
               AI-powered Shariah validation, digital passports, and transparent
-              blockchain technology. Join the future of Islamic finance.
+              blockchain technology. Join the future of Islamic Economy.
             </motion.p>
 
             {/* CTAs */}
