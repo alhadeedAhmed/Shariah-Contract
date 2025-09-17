@@ -44,7 +44,7 @@ const SignIn = () => {
       return "individual";
     }
   });
-  const { signInAs } = useAuth();
+  const { signInAs, signIn } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -75,9 +75,38 @@ const SignIn = () => {
     }, 1500);
   };
 
+  const handleRealSignIn = async () => {
+    setIsLoading(true);
+    try {
+      await signIn({ email, password, role: role as any });
+
+      toast({
+        title: "Success!",
+        description: `Signed in as ${role}`,
+      });
+
+      if (role === "individual") navigate("/marketplace");
+      else if (role === "business") navigate("/investments");
+      else if (role === "provider") navigate("/provider/dashboard");
+      else if (role === "scholar") navigate("/scholar/dashboard");
+      else if (role === "capitalProvider") navigate("/capital/dashboard");
+      else if (role === "admin") navigate("/admin/dashboard");
+      else navigate("/dashboard");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message || "Sign in failed",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleDemoSignIn();
+    // Use real sign in with API calls
+    handleRealSignIn();
   };
 
   const features = [
