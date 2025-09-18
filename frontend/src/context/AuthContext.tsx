@@ -51,22 +51,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const initializeAuth = async () => {
       try {
         const token = localStorage.getItem("accessToken");
+        console.log("Auth initialization - Token exists:", !!token);
         if (token) {
           // Verify token and get user profile
           const response = await apiService.getProfile();
+          console.log("Profile response:", response);
           if (response.success) {
+            // Get role from localStorage or determine from user data
+            const storedRole = localStorage.getItem("role");
+            console.log("Stored role:", storedRole);
             setUser({
               ...response.data.user,
-              role: response.data.user.fullName
-                ? "individual"
-                : "capitalProvider",
+              role:
+                storedRole ||
+                (response.data.user.fullName
+                  ? "individual"
+                  : "capitalProvider"),
             });
           } else {
+            console.log("Profile response failed, clearing tokens");
             // Token is invalid, clear storage
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
             localStorage.removeItem("role");
           }
+        } else {
+          console.log("No token found in localStorage");
         }
       } catch (error) {
         console.error("Auth initialization error:", error);
@@ -201,11 +211,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         // Get updated user profile
         const profileResponse = await apiService.getProfile();
         if (profileResponse.success) {
+          // Get role from localStorage or determine from user data
+          const storedRole = localStorage.getItem("role");
           setUser({
             ...profileResponse.data.user,
-            role: profileResponse.data.user.fullName
-              ? "individual"
-              : "capitalProvider",
+            role:
+              storedRole ||
+              (profileResponse.data.user.fullName
+                ? "individual"
+                : "capitalProvider"),
           });
         }
       } else {

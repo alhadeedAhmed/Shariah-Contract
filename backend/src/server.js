@@ -7,6 +7,8 @@ import rateLimit from "express-rate-limit";
 import { config } from "../config/env.js";
 import connectDB from "../config/database.js";
 import authRoutes from "../routes/auth.js";
+import marketplaceRoutes from "../routes/marketplace.js";
+import contractRoutes from "../routes/contracts.js";
 
 const app = express();
 
@@ -65,6 +67,8 @@ app.get("/health", (req, res) => {
 
 // API routes
 app.use("/api/auth", authRoutes);
+app.use("/api/marketplace", marketplaceRoutes);
+app.use("/api/contracts", contractRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {

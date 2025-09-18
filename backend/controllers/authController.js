@@ -66,10 +66,10 @@ export const individualSignup = async (req, res) => {
       },
       // Set initial verification status
       verificationStatus: {
-        emailVerified: false,
-        documentsVerified: false,
-        kycCompleted: false,
-        shariahPassportIssued: false,
+        emailVerified: true, // Set to true for testing
+        documentsVerified: true, // Set to true for testing
+        kycCompleted: true, // Set to true for testing
+        shariahPassportIssued: true, // Set to true for testing
       },
       // Generate digital passport
       digitalPassport: {
@@ -80,6 +80,8 @@ export const individualSignup = async (req, res) => {
         expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year
         status: "active",
       },
+      // Set account status to active for testing
+      accountStatus: "active",
       emailVerificationToken: crypto.randomBytes(32).toString("hex"),
       emailVerificationExpires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
     });

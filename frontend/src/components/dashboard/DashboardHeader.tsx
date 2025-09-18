@@ -50,7 +50,7 @@ const allNav = {
 const DashboardHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { role } = useAuth();
+  const { user, role } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = () => {
@@ -136,7 +136,9 @@ const DashboardHeader = () => {
                       className="object-cover"
                     />
                     <AvatarFallback className="bg-adalah-golden/20 text-adalah-primary">
-                      U
+                      {user?.fullName?.charAt(0)?.toUpperCase() ||
+                        user?.institutionName?.charAt(0)?.toUpperCase() ||
+                        "U"}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -145,10 +147,15 @@ const DashboardHeader = () => {
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
                     <p className="text-sm font-medium leading-none text-adalah-primary">
-                      User Name
+                      {user?.fullName || user?.institutionName || "User"}
                     </p>
                     <p className="text-xs leading-none text-gray-500">
-                      user@example.com
+                      {user?.email || "user@example.com"}
+                    </p>
+                    <p className="text-xs leading-none text-green-600">
+                      {user?.accountStatus === "active"
+                        ? "✓ Active"
+                        : "⚠ Inactive"}
                     </p>
                   </div>
                 </DropdownMenuLabel>

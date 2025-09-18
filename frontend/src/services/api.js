@@ -96,6 +96,163 @@ class ApiService {
   async healthCheck() {
     return fetch("http://localhost:5000/health").then((res) => res.json());
   }
+
+  // Marketplace API
+  async getVehicles(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/marketplace/vehicles?${queryString}`);
+  }
+
+  async getVehicleById(id) {
+    return this.request(`/marketplace/vehicles/${id}`);
+  }
+
+  async searchVehicles(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/marketplace/vehicles/search?${queryString}`);
+  }
+
+  async getServiceProviders(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/marketplace/service-providers?${queryString}`);
+  }
+
+  async requestQuote(vehicleId, data) {
+    return this.request(`/marketplace/vehicles/${vehicleId}/quotes`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getCustomerQuotes(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/marketplace/quotes?${queryString}`);
+  }
+
+  async getQuoteById(id) {
+    return this.request(`/marketplace/quotes/${id}`);
+  }
+
+  async acceptQuote(id, data) {
+    return this.request(`/marketplace/quotes/${id}/accept`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async rejectQuote(id, data) {
+    return this.request(`/marketplace/quotes/${id}/reject`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async addQuoteMessage(id, data) {
+    return this.request(`/marketplace/quotes/${id}/messages`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  // Contracts API
+  async createMurabahahContract(data) {
+    return this.request("/contracts/murabahah", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async runAIAnalysis(contractId) {
+    return this.request(`/contracts/murabahah/${contractId}/ai-analysis`, {
+      method: "POST",
+    });
+  }
+
+  async generateContract(contractId) {
+    return this.request(`/contracts/murabahah/${contractId}/generate`, {
+      method: "POST",
+    });
+  }
+
+  async submitContractForReview(contractId) {
+    return this.request(`/contracts/murabahah/${contractId}/submit`, {
+      method: "POST",
+    });
+  }
+
+  async getCustomerContracts(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/contracts/murabahah?${queryString}`);
+  }
+
+  async getContractById(id) {
+    return this.request(`/contracts/murabahah/${id}`);
+  }
+
+  // Phase 4: Approval Process APIs
+  async getContractApprovalStatus(contractId) {
+    return this.request(`/contracts/murabahah/${contractId}/approval-status`);
+  }
+
+  async acceptContractTerms(contractId) {
+    return this.request(`/contracts/murabahah/${contractId}/accept-terms`, {
+      method: "POST",
+    });
+  }
+
+  async initiateContractNegotiation(contractId, negotiationData) {
+    return this.request(`/contracts/murabahah/${contractId}/negotiate`, {
+      method: "POST",
+      body: JSON.stringify(negotiationData),
+    });
+  }
+
+  // Approval workflow APIs (for testing/demo purposes)
+  async approveContractByScholar(contractId, scholarData) {
+    return this.request(`/contracts/murabahah/${contractId}/scholar-approve`, {
+      method: "POST",
+      body: JSON.stringify(scholarData),
+    });
+  }
+
+  async approveContractByCapitalProvider(contractId, capitalProviderData) {
+    return this.request(
+      `/contracts/murabahah/${contractId}/capital-provider-approve`,
+      {
+        method: "POST",
+        body: JSON.stringify(capitalProviderData),
+      }
+    );
+  }
+
+  async getCustomerApplications(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/contracts/applications?${queryString}`);
+  }
+
+  async getApplicationById(id) {
+    return this.request(`/contracts/applications/${id}`);
+  }
+
+  // Quote response methods
+  async getServiceProviderQuotes(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/marketplace/service-provider/quotes?${queryString}`);
+  }
+
+  async respondToQuote(quoteId, responseData) {
+    return this.request(`/marketplace/quotes/${quoteId}/respond`, {
+      method: "POST",
+      body: JSON.stringify(responseData),
+    });
+  }
+
+  // Contract AI Analysis
+  async runAIAnalysis(contractId) {
+    return this.request(`/contracts/murabahah/${contractId}/ai-analysis`, {
+      method: "POST",
+    });
+  }
 }
 
 export default new ApiService();
