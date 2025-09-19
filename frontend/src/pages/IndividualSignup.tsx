@@ -21,9 +21,14 @@ import {
   CheckCircle,
   Eye,
   EyeOff,
+  Camera,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { createFileData, FileData } from "@/utils/fileUtils";
+import FaceVerification, {
+  FaceVerificationData,
+} from "@/components/shared/FaceVerification";
 
 const steps = [
   "Registration",
@@ -37,6 +42,7 @@ const IndividualSignup = () => {
   const [step, setStep] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showFaceVerification, setShowFaceVerification] = useState(false);
   const navigate = useNavigate();
   const { signUp } = useAuth();
   const { toast } = useToast();
@@ -56,6 +62,8 @@ const IndividualSignup = () => {
         mimetype: "",
         size: 0,
         uploadedAt: null as Date | null,
+        base64Data: "",
+        publicUrl: "",
       },
       salaryCertificate: {
         filename: "",
@@ -63,19 +71,37 @@ const IndividualSignup = () => {
         mimetype: "",
         size: 0,
         uploadedAt: null as Date | null,
+        base64Data: "",
+        publicUrl: "",
       },
-      bankStatements: [] as Array<{
-        filename: string;
-        originalName: string;
-        mimetype: string;
-        size: number;
-        uploadedAt: Date;
-      }>,
+      bankStatements: [] as FileData[],
     },
     // Biometric Information - matching backend structure
     biometricData: {
       fingerprintHash: "",
       faceIdHash: "",
+      faceImage: {
+        base64Data: "",
+        publicUrl: "",
+        confidence: 0,
+        qualityScore: 0,
+        verificationLevel: "failed" as
+          | "basic"
+          | "enhanced"
+          | "advanced"
+          | "failed",
+        faceBox: {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0,
+        },
+        landmarks: {
+          eyes: [] as number[],
+          nose: [] as number[],
+          mouth: [] as number[],
+        },
+      },
       verified: false,
       verifiedAt: null as Date | null,
     },
@@ -88,7 +114,118 @@ const IndividualSignup = () => {
     },
   });
 
-  const next = () => setStep((s) => Math.min(s + 1, steps.length - 1));
+  const validateStep = (stepNumber: number) => {
+    switch (stepNumber) {
+      case 0: // Registration
+        if (!formData.fullName.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter your full name",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.email.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter email address",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!validateEmail(formData.email)) {
+          toast({
+            title: "Invalid Email",
+            description: "Please enter a valid email address",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.password.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter password",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.employment.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please select employment status",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.income.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter monthly income",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return true;
+
+      case 1: // Documents
+        if (!formData.documents.idDocument.filename) {
+          toast({
+            title: "Validation Error",
+            description: "Please upload ID document",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.documents.salaryCertificate.filename) {
+          toast({
+            title: "Validation Error",
+            description: "Please upload salary certificate",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.documents.bankStatements.length) {
+          toast({
+            title: "Validation Error",
+            description: "Please upload bank statement",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return true;
+
+      case 2: // Biometric
+        if (!formData.biometricData.verified) {
+          toast({
+            title: "Validation Error",
+            description: "Please complete biometric verification",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return true;
+
+      case 3: // MPA Agreement
+        if (!formData.mpaAgreement.accepted) {
+          toast({
+            title: "Validation Error",
+            description: "Please accept the Master Platform Agreement",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return true;
+
+      default:
+        return true;
+    }
+  };
+
+  const next = () => {
+    if (validateStep(step)) {
+      setStep((s) => Math.min(s + 1, steps.length - 1));
+    }
+  };
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
   const handleInputChange = (field: string, value: any) => {
@@ -109,31 +246,81 @@ const IndividualSignup = () => {
     }
   };
 
-  const handleFileUpload = (field: string, file: File) => {
-    const fileData = {
-      filename: `${Date.now()}_${file.name}`,
-      originalName: file.name,
-      mimetype: file.type,
-      size: file.size,
-      uploadedAt: new Date(),
-    };
+  const handleFileUpload = async (field: string, file: File) => {
+    try {
+      const fileData = await createFileData(file);
 
-    if (field === "documents.bankStatements") {
-      setFormData((prev) => ({
-        ...prev,
-        documents: {
-          ...prev.documents,
-          bankStatements: [...prev.documents.bankStatements, fileData],
-        },
-      }));
-    } else {
-      handleInputChange(field, fileData);
+      if (field === "documents.bankStatements") {
+        setFormData((prev) => ({
+          ...prev,
+          documents: {
+            ...prev.documents,
+            bankStatements: [...prev.documents.bankStatements, fileData],
+          },
+        }));
+      } else {
+        handleInputChange(field, fileData);
+      }
+    } catch (error) {
+      toast({
+        title: "File Upload Error",
+        description: "Failed to process the file. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  // Face verification handlers
+  const handleFaceVerification = (faceData: FaceVerificationData) => {
+    setFormData((prev) => {
+      const updatedBiometricData = {
+        ...prev.biometricData,
+        faceIdHash: `face_${Date.now()}`,
+        faceImage: {
+          base64Data: faceData.faceImage,
+          publicUrl: faceData.faceImage,
+          confidence: faceData.confidence,
+          qualityScore: faceData.qualityScore,
+          verificationLevel: faceData.verificationLevel,
+          faceBox: faceData.faceBox,
+          landmarks: {
+            eyes: [],
+            nose: [],
+            mouth: [],
+          },
+        },
+      };
+
+      // Check if both biometrics are now verified
+      const fingerprintVerified = prev.biometricData.fingerprintHash !== "";
+      if (fingerprintVerified) {
+        updatedBiometricData.verified = true;
+        updatedBiometricData.verifiedAt = new Date();
+      }
+
+      return {
+        ...prev,
+        biometricData: updatedBiometricData,
+      };
+    });
+
+    toast({
+      title: "Face Verification Successful!",
+      description: `Face verification completed with ${faceData.verificationLevel} confidence`,
+    });
+  };
+
+  const handleFaceVerificationError = (error: string) => {
+    toast({
+      title: "Face Verification Failed",
+      description: error,
+      variant: "destructive",
+    });
   };
 
   const handleSubmit = async () => {
@@ -476,10 +663,21 @@ const IndividualSignup = () => {
                         className="border-adalah-primary/20"
                       />
                       {formData.documents.idDocument.filename && (
-                        <p className="text-sm text-green-600 mt-1">
-                          ✓ {formData.documents.idDocument.originalName}{" "}
-                          uploaded
-                        </p>
+                        <div className="mt-2">
+                          <p className="text-sm text-green-600 mb-2">
+                            ✓ {formData.documents.idDocument.originalName}{" "}
+                            uploaded
+                          </p>
+                          {formData.documents.idDocument.publicUrl && (
+                            <div className="mt-2">
+                              <img
+                                src={formData.documents.idDocument.publicUrl}
+                                alt="ID Document Preview"
+                                className="max-w-xs max-h-32 object-contain border border-gray-200 rounded"
+                              />
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
 
@@ -501,10 +699,24 @@ const IndividualSignup = () => {
                         className="border-adalah-primary/20"
                       />
                       {formData.documents.salaryCertificate.filename && (
-                        <p className="text-sm text-green-600 mt-1">
-                          ✓ {formData.documents.salaryCertificate.originalName}{" "}
-                          uploaded
-                        </p>
+                        <div className="mt-2">
+                          <p className="text-sm text-green-600 mb-2">
+                            ✓{" "}
+                            {formData.documents.salaryCertificate.originalName}{" "}
+                            uploaded
+                          </p>
+                          {formData.documents.salaryCertificate.publicUrl && (
+                            <div className="mt-2">
+                              <img
+                                src={
+                                  formData.documents.salaryCertificate.publicUrl
+                                }
+                                alt="Salary Certificate Preview"
+                                className="max-w-xs max-h-32 object-contain border border-gray-200 rounded"
+                              />
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
 
@@ -526,17 +738,33 @@ const IndividualSignup = () => {
                       />
                       {formData.documents.bankStatements.length > 0 && (
                         <div className="mt-2">
-                          <p className="text-sm text-green-600 mb-1">
+                          <p className="text-sm text-green-600 mb-2">
                             ✓ {formData.documents.bankStatements.length} bank
                             statement(s) uploaded:
                           </p>
-                          <ul className="text-xs text-gray-600 ml-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {formData.documents.bankStatements.map(
                               (doc, index) => (
-                                <li key={index}>• {doc.originalName}</li>
+                                <div
+                                  key={index}
+                                  className="border border-gray-200 rounded p-2"
+                                >
+                                  <p className="text-xs text-gray-600 mb-1">
+                                    • {doc.originalName}
+                                  </p>
+                                  {doc.publicUrl && (
+                                    <img
+                                      src={doc.publicUrl}
+                                      alt={`Bank Statement ${
+                                        index + 1
+                                      } Preview`}
+                                      className="max-w-full max-h-24 object-contain"
+                                    />
+                                  )}
+                                </div>
                               )
                             )}
-                          </ul>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -590,27 +818,12 @@ const IndividualSignup = () => {
                     </div>
 
                     <div className="p-4 border border-adalah-primary/20 rounded-lg">
-                      <User className="h-8 w-8 text-adalah-golden mx-auto mb-2" />
+                      <Camera className="h-8 w-8 text-adalah-golden mx-auto mb-2" />
                       <h4 className="font-medium text-adalah-primary mb-2">
                         Face Recognition
                       </h4>
                       <Button
-                        onClick={() => {
-                          handleInputChange(
-                            "biometricData.faceIdHash",
-                            `face_${Date.now()}`
-                          );
-                          // Check if both biometrics are now verified
-                          const fingerprintVerified =
-                            formData.biometricData.fingerprintHash !== "";
-                          if (fingerprintVerified) {
-                            handleInputChange("biometricData.verified", true);
-                            handleInputChange(
-                              "biometricData.verifiedAt",
-                              new Date()
-                            );
-                          }
-                        }}
+                        onClick={() => setShowFaceVerification(true)}
                         disabled={formData.biometricData.faceIdHash !== ""}
                         className="w-full bg-gradient-to-r from-adalah-golden to-adalah-dark text-white"
                       >
@@ -618,6 +831,19 @@ const IndividualSignup = () => {
                           ? "✓ Verified"
                           : "Verify Face"}
                       </Button>
+                      {formData.biometricData.faceImage && (
+                        <div className="mt-3">
+                          <img
+                            src={formData.biometricData.faceImage.publicUrl}
+                            alt="Face verification"
+                            className="w-16 h-16 object-cover rounded-full mx-auto border-2 border-green-500"
+                          />
+                          <p className="text-xs text-green-600 mt-1">
+                            {formData.biometricData.faceImage.verificationLevel}{" "}
+                            verification
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -831,6 +1057,14 @@ const IndividualSignup = () => {
           </Card>
         </div>
       </div>
+
+      {/* Face Verification Modal */}
+      <FaceVerification
+        isOpen={showFaceVerification}
+        onClose={() => setShowFaceVerification(false)}
+        onVerify={handleFaceVerification}
+        onError={handleFaceVerificationError}
+      />
     </div>
   );
 };

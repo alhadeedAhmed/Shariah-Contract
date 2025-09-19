@@ -12,6 +12,8 @@ import {
   searchVehicles,
   respondToQuote,
   getServiceProviderQuotes,
+  getAllQuotes,
+  adminRespondToQuote,
 } from "../controllers/marketplaceController.js";
 import { authenticate } from "../middleware/auth.js";
 
@@ -37,5 +39,9 @@ router.post("/quotes/:id/messages", addQuoteMessage);
 // Service provider routes
 router.get("/service-provider/quotes", getServiceProviderQuotes);
 router.post("/quotes/:quoteId/respond", respondToQuote);
+
+// Admin routes
+router.get("/admin/quotes", getAllQuotes);
+router.post("/admin/quotes/:quoteId/respond", adminRespondToQuote);
 
 export default router;

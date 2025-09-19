@@ -2,6 +2,7 @@ import Vehicle from "../models/Vehicle.js";
 import ServiceProvider from "../models/ServiceProvider.js";
 import Quote from "../models/Quote.js";
 import Individual from "../models/Individual.js";
+import { emailService } from "../services/emailService.js";
 
 // Get all vehicles with filtering and pagination
 export const getVehicles = async (req, res) => {
@@ -248,10 +249,25 @@ export const requestQuote = async (req, res) => {
 
     // Populate the quote with related data
     await quote.populate([
-      { path: "customer", select: "fullName email" },
+      { path: "customer", select: "fullName email phone" },
       { path: "serviceProvider", select: "businessName email phone" },
       { path: "vehicle", select: "make model year price images" },
     ]);
+
+    // Send email notification to admin
+    try {
+      const emailResult = await emailService.sendQuoteRequestNotification(
+        quote
+      );
+      if (emailResult.success) {
+        console.log("Quote request email sent successfully");
+      } else {
+        console.error("Failed to send quote request email:", emailResult.error);
+      }
+    } catch (emailError) {
+      console.error("Error sending quote request email:", emailError);
+      // Don't fail the request if email fails
+    }
 
     res.status(201).json({
       success: true,
@@ -631,6 +647,176 @@ export const getServiceProviderQuotes = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to get quotes",
+      error: error.message,
+    });
+  }
+};
+
+// Respond to a quote (Admin function)
+export const adminRespondToQuote = async (req, res) => {
+  try {
+    const { quoteId } = req.params;
+    const {
+      status,
+      message,
+      pricing,
+      terms,
+      responseType = "admin_response",
+    } = req.body;
+
+    // Find the quote
+    const quote = await Quote.findById(quoteId)
+      .populate("customer", "fullName email phone")
+      .populate("serviceProvider", "businessName email phone")
+      .populate("vehicle", "make model year");
+
+    if (!quote) {
+      return res.status(404).json({
+        success: false,
+        message: "Quote not found",
+      });
+    }
+
+    // Update quote with response
+    quote.status = status || "responded";
+    quote.response = {
+      status: status || "responded",
+      message: message || "",
+      pricing: pricing || quote.pricing,
+      terms: terms || quote.terms,
+      responseType,
+      respondedAt: new Date(),
+    };
+
+    // Add response message to conversation
+    quote.messages.push({
+      sender: "service_provider",
+      message: message || "Quote response provided",
+      timestamp: new Date(),
+    });
+
+    await quote.save();
+
+    // Send email notification to customer
+    try {
+      const emailResult = await emailService.sendQuoteResponse(
+        quote,
+        quote.response
+      );
+      if (emailResult.success) {
+        console.log("Quote response email sent successfully");
+      } else {
+        console.error(
+          "Failed to send quote response email:",
+          emailResult.error
+        );
+      }
+    } catch (emailError) {
+      console.error("Error sending quote response email:", emailError);
+      // Don't fail the request if email fails
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Quote response sent successfully",
+      data: { quote },
+    });
+  } catch (error) {
+    console.error("Respond to quote error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to respond to quote",
+      error: error.message,
+    });
+  }
+};
+
+// Get all quotes for admin (with filtering)
+export const getAllQuotes = async (req, res) => {
+  try {
+    const {
+      status,
+      page = 1,
+      limit = 10,
+      sortBy = "createdAt",
+      sortOrder = "desc",
+    } = req.query;
+
+    // Build filter
+    const filter = {};
+    if (status) {
+      filter.status = status;
+    }
+
+    // Build sort
+    const sort = {};
+    sort[sortBy] = sortOrder === "desc" ? -1 : 1;
+
+    // Calculate pagination
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    // Get quotes with pagination
+    const quotes = await Quote.find(filter)
+      .populate("customer", "fullName email phone")
+      .populate("serviceProvider", "businessName email phone")
+      .populate("vehicle", "make model year price images")
+      .sort(sort)
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    // Get total count
+    const totalQuotes = await Quote.countDocuments(filter);
+    const totalPages = Math.ceil(totalQuotes / parseInt(limit));
+
+    res.status(200).json({
+      success: true,
+      data: {
+        quotes,
+        pagination: {
+          currentPage: parseInt(page),
+          totalPages,
+          totalQuotes,
+          hasNext: parseInt(page) < totalPages,
+          hasPrev: parseInt(page) > 1,
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Get all quotes error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to get quotes",
+      error: error.message,
+    });
+  }
+};
+
+// Get quote by ID (Admin function)
+export const adminGetQuoteById = async (req, res) => {
+  try {
+    const { quoteId } = req.params;
+
+    const quote = await Quote.findById(quoteId)
+      .populate("customer", "fullName email phone address")
+      .populate("serviceProvider", "businessName email phone address")
+      .populate("vehicle", "make model year price images specifications");
+
+    if (!quote) {
+      return res.status(404).json({
+        success: false,
+        message: "Quote not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: { quote },
+    });
+  } catch (error) {
+    console.error("Get quote by ID error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to get quote",
       error: error.message,
     });
   }

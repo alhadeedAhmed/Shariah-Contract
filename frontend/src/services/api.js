@@ -253,6 +253,25 @@ class ApiService {
       method: "POST",
     });
   }
+
+  // Admin Quote Management
+  async getAllQuotes(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/marketplace/admin/quotes?${queryString}`);
+  }
+
+  // Generic GET method for custom endpoints
+  async get(endpoint) {
+    return this.request(endpoint);
+  }
+
+  // Generic POST method for custom endpoints
+  async post(endpoint, data) {
+    return this.request(endpoint, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
 }
 
 export default new ApiService();

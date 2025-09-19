@@ -68,6 +68,8 @@ const individualSchema = new mongoose.Schema(
         mimetype: String,
         size: Number,
         uploadedAt: Date,
+        base64Data: String,
+        publicUrl: String,
       },
       salaryCertificate: {
         filename: String,
@@ -75,6 +77,8 @@ const individualSchema = new mongoose.Schema(
         mimetype: String,
         size: Number,
         uploadedAt: Date,
+        base64Data: String,
+        publicUrl: String,
       },
       bankStatements: [
         {
@@ -83,6 +87,8 @@ const individualSchema = new mongoose.Schema(
           mimetype: String,
           size: Number,
           uploadedAt: Date,
+          base64Data: String,
+          publicUrl: String,
         },
       ],
     },
@@ -91,6 +97,28 @@ const individualSchema = new mongoose.Schema(
     biometricData: {
       fingerprintHash: String,
       faceIdHash: String,
+      faceImage: {
+        base64Data: String,
+        publicUrl: String,
+        confidence: Number,
+        qualityScore: Number,
+        verificationLevel: {
+          type: String,
+          enum: ["basic", "enhanced", "advanced", "failed"],
+          default: "failed",
+        },
+        faceBox: {
+          x: Number,
+          y: Number,
+          width: Number,
+          height: Number,
+        },
+        landmarks: {
+          eyes: [Number],
+          nose: [Number],
+          mouth: [Number],
+        },
+      },
       verified: {
         type: Boolean,
         default: false,

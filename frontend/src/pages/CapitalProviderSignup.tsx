@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Banknote, ShieldCheck, BarChart3, Upload } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { createFileData, FileData } from "@/utils/fileUtils";
 
 const steps = [
   "Institution Onboarding",
@@ -49,6 +50,8 @@ const CapitalProviderSignup = () => {
         mimetype: "",
         size: 0,
         uploadedAt: null as Date | null,
+        base64Data: "",
+        publicUrl: "",
       },
       complianceCertificate: {
         filename: "",
@@ -56,15 +59,10 @@ const CapitalProviderSignup = () => {
         mimetype: "",
         size: 0,
         uploadedAt: null as Date | null,
+        base64Data: "",
+        publicUrl: "",
       },
-      auditReports: [] as Array<{
-        filename: string;
-        originalName: string;
-        mimetype: string;
-        size: number;
-        uploadedAt: Date;
-        year: number;
-      }>,
+      auditReports: [] as Array<FileData & { year: number }>,
     },
     riskProfile: {
       riskTolerance: "medium",
@@ -119,31 +117,205 @@ const CapitalProviderSignup = () => {
     return emailRegex.test(email);
   };
 
-  const handleFileUpload = (field: string, file: File) => {
-    const fileData = {
-      filename: `${Date.now()}_${file.name}`,
-      originalName: file.name,
-      mimetype: file.type,
-      size: file.size,
-      uploadedAt: new Date(),
-    };
-
-    if (field === "complianceDocuments.auditReports") {
-      const year = new Date().getFullYear();
-      const auditData = { ...fileData, year };
-      setFormData((prev) => ({
-        ...prev,
-        complianceDocuments: {
-          ...prev.complianceDocuments,
-          auditReports: [...prev.complianceDocuments.auditReports, auditData],
-        },
-      }));
-    } else {
-      handleChange(field, fileData);
+  const handleFileUpload = async (field: string, file: File) => {
+    try {
+      if (field === "complianceDocuments.auditReports") {
+        const year = new Date().getFullYear();
+        const fileData = await createFileData(file, { year });
+        setFormData((prev) => ({
+          ...prev,
+          complianceDocuments: {
+            ...prev.complianceDocuments,
+            auditReports: [...prev.complianceDocuments.auditReports, fileData],
+          },
+        }));
+      } else {
+        const fileData = await createFileData(file);
+        handleChange(field, fileData);
+      }
+    } catch (error) {
+      toast({
+        title: "File Upload Error",
+        description: "Failed to process the file. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
-  const next = () => setStep((s) => Math.min(s + 1, steps.length - 1));
+  const validateStep = (stepNumber: number) => {
+    switch (stepNumber) {
+      case 0: // Institution Onboarding
+        if (!formData.institutionName.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter institution name",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.email.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter email address",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!validateEmail(formData.email)) {
+          toast({
+            title: "Invalid Email",
+            description: "Please enter a valid email address",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.password.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter password",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.regulatoryLicense.licenseNumber.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter regulatory license number",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.regulatoryLicense.issuingAuthority.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter issuing authority",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.regulatoryLicense.issueDate) {
+          toast({
+            title: "Validation Error",
+            description: "Please select license issue date",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.regulatoryLicense.expiryDate) {
+          toast({
+            title: "Validation Error",
+            description: "Please select license expiry date",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.complianceOfficer.name.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter compliance officer name",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.complianceOfficer.email.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter compliance officer email",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!validateEmail(formData.complianceOfficer.email)) {
+          toast({
+            title: "Invalid Compliance Officer Email",
+            description:
+              "Please enter a valid compliance officer email address",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return true;
+
+      case 1: // Risk Profile Setup
+        if (!formData.riskProfile.maximumLoanAmount.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter maximum loan amount",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.riskProfile.minimumLoanAmount.trim()) {
+          toast({
+            title: "Validation Error",
+            description: "Please enter minimum loan amount",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (formData.riskProfile.lendingCriteria.length === 0) {
+          toast({
+            title: "Validation Error",
+            description: "Please select at least one lending criteria",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (formData.riskProfile.productOfferings.length === 0) {
+          toast({
+            title: "Validation Error",
+            description: "Please select at least one product offering",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (formData.riskProfile.pricingModels.length === 0) {
+          toast({
+            title: "Validation Error",
+            description: "Please select at least one pricing model",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return true;
+
+      case 2: // Compliance Documents
+        if (!formData.complianceDocuments.licenseDocument.filename) {
+          toast({
+            title: "Validation Error",
+            description: "Please upload license document",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.complianceDocuments.complianceCertificate.filename) {
+          toast({
+            title: "Validation Error",
+            description: "Please upload compliance certificate",
+            variant: "destructive",
+          });
+          return false;
+        }
+        if (!formData.complianceVerified) {
+          toast({
+            title: "Validation Error",
+            description: "Please confirm compliance verification",
+            variant: "destructive",
+          });
+          return false;
+        }
+        return true;
+
+      default:
+        return true;
+    }
+  };
+
+  const next = () => {
+    if (validateStep(step)) {
+      setStep((s) => Math.min(s + 1, steps.length - 1));
+    }
+  };
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
   const handleSubmit = async () => {
@@ -720,14 +892,29 @@ const CapitalProviderSignup = () => {
                       />
                       {formData.complianceDocuments.licenseDocument
                         .filename && (
-                        <p className="text-sm text-green-600 mt-1">
-                          ✓{" "}
-                          {
-                            formData.complianceDocuments.licenseDocument
-                              .originalName
-                          }{" "}
-                          uploaded
-                        </p>
+                        <div className="mt-2">
+                          <p className="text-sm text-green-600 mb-2">
+                            ✓{" "}
+                            {
+                              formData.complianceDocuments.licenseDocument
+                                .originalName
+                            }{" "}
+                            uploaded
+                          </p>
+                          {formData.complianceDocuments.licenseDocument
+                            .publicUrl && (
+                            <div className="mt-2">
+                              <img
+                                src={
+                                  formData.complianceDocuments.licenseDocument
+                                    .publicUrl
+                                }
+                                alt="License Document Preview"
+                                className="max-w-xs max-h-32 object-contain border border-gray-200 rounded"
+                              />
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
 
@@ -750,14 +937,29 @@ const CapitalProviderSignup = () => {
                       />
                       {formData.complianceDocuments.complianceCertificate
                         .filename && (
-                        <p className="text-sm text-green-600 mt-1">
-                          ✓{" "}
-                          {
-                            formData.complianceDocuments.complianceCertificate
-                              .originalName
-                          }{" "}
-                          uploaded
-                        </p>
+                        <div className="mt-2">
+                          <p className="text-sm text-green-600 mb-2">
+                            ✓{" "}
+                            {
+                              formData.complianceDocuments.complianceCertificate
+                                .originalName
+                            }{" "}
+                            uploaded
+                          </p>
+                          {formData.complianceDocuments.complianceCertificate
+                            .publicUrl && (
+                            <div className="mt-2">
+                              <img
+                                src={
+                                  formData.complianceDocuments
+                                    .complianceCertificate.publicUrl
+                                }
+                                alt="Compliance Certificate Preview"
+                                className="max-w-xs max-h-32 object-contain border border-gray-200 rounded"
+                              />
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
 
@@ -782,19 +984,31 @@ const CapitalProviderSignup = () => {
                       />
                       {formData.complianceDocuments.auditReports.length > 0 && (
                         <div className="mt-2">
-                          <p className="text-sm text-green-600 mb-1">
+                          <p className="text-sm text-green-600 mb-2">
                             ✓ {formData.complianceDocuments.auditReports.length}{" "}
                             audit report(s) uploaded:
                           </p>
-                          <ul className="text-xs text-gray-600 ml-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {formData.complianceDocuments.auditReports.map(
                               (doc, index) => (
-                                <li key={index}>
-                                  • {doc.originalName} ({doc.year})
-                                </li>
+                                <div
+                                  key={index}
+                                  className="border border-gray-200 rounded p-2"
+                                >
+                                  <p className="text-xs text-gray-600 mb-1">
+                                    • {doc.originalName} ({doc.year})
+                                  </p>
+                                  {doc.publicUrl && (
+                                    <img
+                                      src={doc.publicUrl}
+                                      alt={`Audit Report ${index + 1} Preview`}
+                                      className="max-w-full max-h-24 object-contain"
+                                    />
+                                  )}
+                                </div>
                               )
                             )}
-                          </ul>
+                          </div>
                         </div>
                       )}
                     </div>

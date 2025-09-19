@@ -83,6 +83,8 @@ const capitalProviderSchema = new mongoose.Schema(
         mimetype: String,
         size: Number,
         uploadedAt: Date,
+        base64Data: String,
+        publicUrl: String,
       },
       complianceCertificate: {
         filename: String,
@@ -90,6 +92,8 @@ const capitalProviderSchema = new mongoose.Schema(
         mimetype: String,
         size: Number,
         uploadedAt: Date,
+        base64Data: String,
+        publicUrl: String,
       },
       auditReports: [
         {
@@ -99,6 +103,8 @@ const capitalProviderSchema = new mongoose.Schema(
           size: Number,
           uploadedAt: Date,
           year: Number,
+          base64Data: String,
+          publicUrl: String,
         },
       ],
     },
